@@ -13,3 +13,9 @@ hs_err_pid*
 
 build/
 target/
+
+.classpath
+.project
+.settings/
+.tern-project
+
