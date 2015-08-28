@@ -5,27 +5,37 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Entrar - Events Tickets</title>
+
+<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="vendor/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+
 </head>
 <body>
-	<h1>Entrar</h1>
-	<%
-		String error = request.getParameter("error");
-		if (error != null && error.equals("true")) {
-			out.println("<div class='error-message'>Usuário ou senha inválido.</div>");
-		}
-	%>
-	<form action="signIn" method="post">
-		<div>
-			<label for="username">Usuário</label>
-			<input type="text" name="username" id="username" />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4 col-sm-offset-4">
+				<h1>Entrar</h1>
+				<%
+					String error = request.getParameter("error");
+					if (error != null && error.equals("true")) {
+						out.println("<div class='alert alert-danger' role='alert'>Usuário ou senha inválido.</div>");
+					}
+				%>
+				<form action="signIn" method="post">
+					<div class="form-group">
+						<label for="username">Usuário</label>
+						<input type="text" name="username" id="username" class="form-control" />
+					</div>
+					<div class="form-group">
+						<label for="password">Senha</label>
+						<input type="password" name="password" id="password" class="form-control" />
+					</div>
+					<div class="form-group">
+						<input type="submit" value="Entrar" class="btn btn-primary form-control" />
+					</div>
+				</form>
+			</div>
 		</div>
-		<div>
-			<label for="password">Senha</label>
-			<input type="password" name="password" id="password" />
-		</div>
-		<div>
-			<input type="submit" value="Entrar" />
-		</div>
-	</form>
+	</div>
 </body>
 </html>
