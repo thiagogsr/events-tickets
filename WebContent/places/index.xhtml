@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head></h:head> 
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h:dataTable value="#{place.all}" var="p">
+					<h:column>
+						<f:facet name="header">Título</f:facet>
+			    		#{p.title}
+					</h:column>
+					<h:column>
+						<f:facet name="header">Criado por</f:facet>
+			    		#{p.createdBy.name}
+					</h:column>
+					<h:column>
+						<f:facet name="header">Criado em</f:facet>
+			    		#{p.createdAt}
+					</h:column>
+				</h:dataTable>
+			</div>
+		</div>
+	</div>
+</body> 
+</html>
