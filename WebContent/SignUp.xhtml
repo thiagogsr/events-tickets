@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+<h:head>
+	<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"
+		type="text/css" media="all" />
+	<link href="vendor/bootstrap/css/bootstrap-theme.min.css"
+		rel="stylesheet" type="text/css" media="all" />
+	<h:outputStylesheet href="css" name="bootstrap.min.css"></h:outputStylesheet>
+	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+	<script type="text/javascript"
+		src="https://raw.github.com/digitalBush/jquery.maskedinput/1.3.1/dist/jquery.maskedinput.min.js"></script>
+</h:head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-10 col-sm-offset-2">
+				<div class="portlet box blue">
+					<div class="portlet-body form">
+						<h:form method="post">
+							<div class="form-body">
+								<div class="form-group col-md-6">
+									<label>Nome</label>
+									<div class="input-group">
+										<span class="input-group-addon"> <i
+											class="fa fa-envelope"></i>
+										</span>
+										<h:inputText styleClass="form-control"
+											value="#{userMB.user.name}" id="name" required="true"
+											pt:placeholder="Digite aqui seu Nome"
+											requiredMessage="*Informe seu nome" />
+										<h:message id="m_name" for="name" style="color:#D74937;" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label>Email</label>
+									<div class="input-group">
+										<span class="input-group-addon"> <i
+											class="fa fa-envelope"></i>
+										</span>
+										<h:inputText styleClass="form-control"
+											value="#{userMB.user.email}" required="true" id="email"
+											pt:placeholder="Digite aqui seu email"
+											validatorMessage="email inválido."
+											requiredMessage="* Informe seu email.">
+											<f:validateRegex
+												pattern="[a-zA-Z0-9\-\_\.]+@[a-zA-Z0-9\-\_\.]+" />
+										</h:inputText>
+										<h:message id="m_email" for="email" style="color:#D74937;" />
+									</div>
+								</div>
+								<div class="form-group col-md-6">
+									<label>Telefone</label>
+									<div class="input-group">
+										<span class="input-group-addon"> <i
+											class="fa fa-envelope"></i>
+										</span>
+										<h:inputText value="#{userMB.user.phoneNumber}"
+											styleClass="form-control" id="phoneNumber" required="true"
+											pt:placeholder="Digite aqui seu Telefone"
+											requiredMessage="*Informe seu Telefone" />
+										<h:message id="m_phoneNumber" for="phoneNumber"
+											style="color:#D74937;" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label>Celular</label>
+									<div class="input-group">
+										<span class="input-group-addon"> <i
+											class="fa fa-envelope"></i>
+										</span>
+										<h:inputText value="#{userMB.user.mobilePhoneNumber}"
+											styleClass="form-control" id="mobilePhoneNumber"
+											pt:placeholder="Digite aqui número do seu celular" />
+									</div>
+								</div>
+								<div class="form-group col-md-6">
+									<label for="username">Usuário</label>
+									<div class="input-group">
+										<span class="input-group-addon"> <i
+											class="fa fa-envelope"></i>
+										</span>
+										<h:inputText required="true"
+											requiredMessage="*Informe seu usuário" id="username"
+											styleClass="form-control" value="#{userMB.user.username}"
+											pt:placeholder="Digite aqui seu usuário" />
+										<h:message id="m_username" for="username"
+											style="color:#D74937;" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="password">Senha</label>
+									<div class="input-group">
+										<span class="input-group-addon"> <i class="fa fa-user"></i>
+										</span>
+										<h:inputSecret styleClass="form-control"
+											value="#{userMB.user.password}" id="password" required="true"
+											pt:placeholder="Digite aqui sua Senha"
+											requiredMessage="Informe sua Senha" />
+										<h:message id="m_password" for="password"
+											style="color:#D74937;" />
+									</div>
+								</div>
+							</div>
+							<h:commandButton class="btn btn-primary" action="#{userMB.create()}"
+								value="Salvar"></h:commandButton>
+						</h:form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+

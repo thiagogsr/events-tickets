@@ -3,5 +3,6 @@
   <display-name>events-tickets</display-name>
   <welcome-file-list>
     <welcome-file>login.jsp</welcome-file>
+    <welcome-file>SignUp.xhtml</welcome-file>
   </welcome-file-list>
 </web-app>

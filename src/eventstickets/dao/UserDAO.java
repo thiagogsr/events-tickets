@@ -1,10 +1,13 @@
 package eventstickets.dao;
 
+import java.util.Date;
+
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import eventstickets.dao.MainDAO;
 import eventstickets.helpers.UserHelper;
+import eventstickets.models.Role;
 import eventstickets.models.User;
 
 public class UserDAO extends MainDAO {
@@ -30,5 +33,20 @@ public class UserDAO extends MainDAO {
 			manager.close();
 		}
 		return user;
+	}
+	public void create (User user){
+		EntityManager manager = openSession();
+		try{
+			user.setRole(Role.PARTICIPANT);
+			user.setPassword(UserHelper.getMD5(user.getPassword()));
+			user.setCreatedAt(new Date());
+			manager.getTransaction().begin();
+			manager.persist(user);
+			manager.getTransaction().commit();
+		}catch (Exception e){
+			manager.getTransaction().rollback();
+		}finally{
+			manager.close();
+		}
 	}
 }
