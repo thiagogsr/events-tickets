@@ -6,6 +6,7 @@
     <persistence-unit name="eventstickets.jpa">
         <description>Persistence unit for Events Tickets</description>
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <class>eventstickets.models.Place</class>
         <class>eventstickets.models.User</class>
 
         <properties>

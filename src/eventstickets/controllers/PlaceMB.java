@@ -8,13 +8,22 @@ import javax.faces.bean.ManagedBean;
 import eventstickets.dao.PlaceDAO;
 import eventstickets.models.Place;
 
-@ManagedBean(name="place")
-public class PlaceMB implements Serializable {
+@ManagedBean(name="placeMB")
+public class PlaceMB extends AuthenticateUser implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	private static final List<Place> all = new PlaceDAO().all();
+	private Place place = new Place();
 
 	public List<Place> getAll() {
-		return all;
+		return new PlaceDAO().all();
+	}
+	
+	public Place getPlace() {
+		return place;
+	}
+	
+	public String create() {
+		PlaceDAO dao = new PlaceDAO();
+		dao.create(place, getCurrentUser());
+		return "index?faces-redirect=true";
 	}
 }
