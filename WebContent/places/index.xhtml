@@ -12,22 +12,34 @@
 					<h2>Lugares</h2>
 					<a href="./new.xhtml" class="btn btn-primary" title="Criar Lugar">Novo</a>
 				
-					<h:dataTable value="#{placeMB.all}" var="p" styleClass="table">
-						<h:column>
-							<f:facet name="header">Título</f:facet>
-				    		#{p.title}
-						</h:column>
-						<h:column>
-							<f:facet name="header">Criado por</f:facet>
-				    		#{p.createdBy.name}
-						</h:column>
-						<h:column>
-							<f:facet name="header">Criado em</f:facet>
-							<h:outputText value="#{p.createdAt}" >
-								<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
-							 </h:outputText>
-						</h:column>
-					</h:dataTable>
+					<h:form>
+						<h:dataTable value="#{placeMB.all}" var="p" styleClass="table">
+							<h:column>
+								<f:facet name="header">Título</f:facet>
+					    		#{p.title}
+							</h:column>
+							<h:column>
+								<f:facet name="header">Criado por</f:facet>
+					    		#{p.createdBy.name}
+							</h:column>
+							<h:column>
+								<f:facet name="header">Criado em</f:facet>
+								<h:outputText value="#{p.createdAt}" >
+									<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+								 </h:outputText>
+							</h:column>
+							<h:column>
+								<h:commandLink action="#{placeMB.edit}" value="Editar">
+									<f:setPropertyActionListener target="#{placeMB.id}" value="#{p.id}" />
+								</h:commandLink>
+							</h:column>
+							<h:column>
+								<h:commandLink action="#{placeMB.destroy}" value="Remover">
+									<f:setPropertyActionListener target="#{placeMB.id}" value="#{p.id}" />
+								</h:commandLink>
+							</h:column>
+						</h:dataTable>
+					</h:form>
 				</div>
 			</div>
 		</ui:define>
