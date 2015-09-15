@@ -38,7 +38,7 @@ public class PlaceDAO extends MainDAO {
 		EntityManager manager = openSession();
 		try {
 			manager.getTransaction().begin();    
-		    manager.persist(place);
+		    manager.merge(place);
 		    manager.getTransaction().commit();
 		    return true;
 		} catch (Exception e) {

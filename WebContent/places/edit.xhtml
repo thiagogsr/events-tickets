@@ -10,6 +10,8 @@
 			<h2>Editar Lugar</h2>
 
 			<h:form method="post">
+				<h:inputHidden value="#{placeMB.place.id}" />
+			
 				<div class="form-group">
 	    			<label for="title">Título</label>
 	    			<h:inputText styleClass="form-control" value="#{placeMB.place.title}" id="title" required="true"

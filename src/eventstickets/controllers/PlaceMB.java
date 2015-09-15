@@ -5,13 +5,12 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.ViewScoped;
 
 import eventstickets.dao.PlaceDAO;
 import eventstickets.models.Place;
 
 @ManagedBean(name="placeMB")
-@ViewScoped
+@RequestScoped
 public class PlaceMB extends AuthenticateUser implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Place place = new Place();
@@ -39,8 +38,10 @@ public class PlaceMB extends AuthenticateUser implements Serializable {
 	
 	public String update() {
 		PlaceDAO dao = new PlaceDAO();
-		
-		if (dao.update(place)) {
+		Place oldPlace = dao.find(place.getId());
+		oldPlace.setTitle(place.getTitle());
+
+		if (dao.update(oldPlace)) {
 			return "index?faces-redirect=true";
 		} else {
 			return "edit";
