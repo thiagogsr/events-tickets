@@ -3,10 +3,12 @@ package eventstickets.controllers;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
 import eventstickets.dao.PlaceDAO;
+import eventstickets.helpers.MessageHelper;
 import eventstickets.models.Place;
 
 @ManagedBean(name="placeMB")
@@ -24,7 +26,8 @@ public class PlaceMB extends AuthenticateUser implements Serializable {
 		PlaceDAO dao = new PlaceDAO();
 		
 		if (dao.create(place, getCurrentUser())) {
-			return "index?faces-redirect=true";
+			MessageHelper.addMensage("Lugar criado com sucesso", FacesMessage.SEVERITY_INFO);
+			return "index";
 		} else {
 			return "new";
 		}
@@ -42,7 +45,8 @@ public class PlaceMB extends AuthenticateUser implements Serializable {
 		oldPlace.setTitle(place.getTitle());
 
 		if (dao.update(oldPlace)) {
-			return "index?faces-redirect=true";
+			MessageHelper.addMensage("Lugar atualizado com sucesso", FacesMessage.SEVERITY_INFO);
+			return "index";
 		} else {
 			return "edit";
 		}
@@ -51,7 +55,8 @@ public class PlaceMB extends AuthenticateUser implements Serializable {
 	public String destroy() {
 		PlaceDAO dao = new PlaceDAO();
 		dao.destroy(id);
-		return "index?faces-redirect=true";
+		MessageHelper.addMensage("Lugar removido com sucesso", FacesMessage.SEVERITY_INFO);
+		return "index";
 	}
 
 	public Place getPlace() {

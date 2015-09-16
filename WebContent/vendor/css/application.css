@@ -1,0 +1,10 @@
+.messages {
+	display: block;
+	margin-top: 10px;
+	padding-left: 0px;
+}
+
+.messages li {
+	list-style: none;
+	margin-bottom: 5px;
+}

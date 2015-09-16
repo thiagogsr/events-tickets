@@ -13,6 +13,8 @@
 					<a href="./new.xhtml" class="btn btn-primary" title="Criar Lugar">Novo</a>
 				
 					<h:form>
+						<h:messages errorClass="alert alert-danger" infoClass="alert alert-success" styleClass="messages" />
+
 						<h:dataTable value="#{placeMB.all}" var="p" styleClass="table">
 							<h:column>
 								<f:facet name="header">Título</f:facet>
