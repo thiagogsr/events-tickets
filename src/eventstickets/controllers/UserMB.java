@@ -1,13 +1,17 @@
 package eventstickets.controllers;
 
+import java.io.Serializable;
+
 import javax.faces.bean.*;
 
+import eventstickets.dao.PlaceDAO;
 import eventstickets.dao.UserDAO;
 import eventstickets.models.User;
 
 @ManagedBean (name = "userMB")
 @ViewScoped
-public class UserMB {
+public class UserMB{
+	//private static final long serialVersionUID = 1L;
 	private User user = new User();
 	
 	public User getUser() {
@@ -18,8 +22,13 @@ public class UserMB {
 		this.user = user;
 	}
 	
-	public void create(){
+	public String create(){
 		UserDAO dao = new UserDAO();
-		dao.create(user);
+		
+		if (dao.createSignUp(user)) {
+			return "login?faces-redirect=true";
+		} else {
+			return "SignUp";
+		}
 	}
 }

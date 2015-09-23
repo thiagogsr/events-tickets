@@ -19,3 +19,5 @@ target/
 .settings/
 .tern-project
 
+WebContent/places/index.xhtml
+WebContent/places/index.xhtml

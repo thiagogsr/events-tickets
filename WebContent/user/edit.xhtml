@@ -1,0 +1,70 @@
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+	<ui:composition template="../layout.xhtml">
+		<ui:define name="content">
+			<h2>Editar Usuário</h2>
+
+			<h:form method="post">
+				<h:inputHidden value="#{UserCurrentMB.user.id}" />
+				<div class="form-group">
+	    			<div class="form-group col-md-6">
+								<label>Nome</label>
+								<h:inputText styleClass="form-control"
+									value="#{UserCurrentMB.user.name}" id="name" required="true"
+									requiredMessage="*Informe seu nome" />
+								<h:message id="m_name" for="name" style="color:#D74937;" />
+							</div>
+							<div class="form-group col-md-6">
+								<label>Email</label>
+								<h:inputText styleClass="form-control"
+									value="#{UserCurrentMB.user.email}" required="true" id="email"
+									validatorMessage="email inválido."
+									requiredMessage="* Informe seu email.">
+									<f:validateRegex pattern="[a-zA-Z0-9\-\_\.]+@[a-zA-Z0-9\-\_\.]+" />
+								</h:inputText>
+								<h:message id="m_email" for="email" style="color:#D74937;" />
+							</div>
+							<div class="form-group col-md-6">
+								<label>Telefone</label>
+								<h:inputText value="#{UserCurrentMB.user.phoneNumber}"
+									styleClass="form-control" id="phoneNumber" required="true"
+									requiredMessage="*Informe seu Telefone" />
+								<h:message id="m_phoneNumber" for="phoneNumber"
+									style="color:#D74937;" />
+							</div>
+							<div class="form-group col-md-6">
+								<label>Celular</label>
+								<h:inputText value="#{UserCurrentMB.user.mobilePhoneNumber}"
+									styleClass="form-control" id="mobilePhoneNumber" />
+							</div>
+							<div class="form-group col-md-6">
+								<label for="username">Usuário</label>
+								<h:inputText required="true"
+									requiredMessage="*Informe seu usuário" id="username"
+									styleClass="form-control" value="#{UserCurrentMB.user.username}" />
+								<h:message id="m_username" for="username" style="color:#D74937;" />
+							</div>
+							<div class="form-group col-md-6">
+								<label for="password">Senha</label>
+								<h:inputSecret styleClass="form-control"
+									value="#{UserCurrentMB.user.password}" id="password" required="true"
+									requiredMessage="Informe sua Senha" />
+								<h:message id="m_password" for="password" style="color:#D74937;" />
+							</div>
+							<div class="form-group col-md-6">
+								<label for="password">Perfil</label>
+								<h:selectOneMenu value="#{UserCurrentMB.user.role}">
+									<f:selectItems value="#{UserCurrentMB.role}"/>
+								</h:selectOneMenu>
+							</div>
+						</div>
+	  			<h:commandButton class="btn btn-primary" action="#{UserCurrentMB.update}" value="Atualizar"></h:commandButton>
+	  			<a href="./index.xhtml" title="Listar todos" class="btn btn-default">Cancelar</a>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</html>

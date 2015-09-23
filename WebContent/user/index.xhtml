@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<ui:composition template="../layout.xhtml">
+	<ui:define name="content">
+		<div class="row">
+			<div class="col-md-12">
+				<h2>Usuários</h2>
+				<a href="./new.xhtml" class="btn btn-primary" title="Criar usuário">Novo</a>
+
+				<h:form>
+					<h:dataTable value="#{UserCurrentMB.all}" var="u"
+						styleClass="table">
+						<h:column>
+							<f:facet name="header">Id</f:facet>
+					    		#{u.id}
+							</h:column>
+						<h:column>
+							<f:facet name="header">Criado em</f:facet>
+							<h:outputText value="#{u.createdAt}">
+								<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+							</h:outputText>
+						</h:column>
+						<h:column>
+							<f:facet name="header">e-mail</f:facet>
+								#{u.email}
+							</h:column>
+						<h:column>
+							<f:facet name="header">Nome</f:facet>
+								#{u.name}
+							</h:column>
+						<h:column>
+							<f:facet name="header">Perfil</f:facet>
+								#{u.role}
+							</h:column>
+						<h:column>
+							<h:commandLink action="#{UserCurrentMB.edit}" value="Editar">
+								<f:setPropertyActionListener target="#{UserCurrentMB.id}"
+									value="#{u.id}" />
+							</h:commandLink>
+						</h:column>
+						<h:column>
+							<h:commandLink action="#{UserCurrentMB.destroy}" value="Remover">
+								<f:setPropertyActionListener target="#{UserCurrentMB.id}"
+									value="#{u.id}" />
+							</h:commandLink>
+						</h:column>
+					</h:dataTable>
+				</h:form>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

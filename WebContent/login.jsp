@@ -35,7 +35,7 @@
 					<div class="form-group">
 						<input type="submit" value="Entrar"
 							class="btn btn-primary form-control" /> 
-						<a href="faces/SignUp.xhtml">Cadastre-se</a>
+						<a href="SignUp.xhtml">Cadastre-se</a>
 					</div>
 				</form>
 			</div>

@@ -1,12 +1,14 @@
 package eventstickets.dao;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import eventstickets.dao.MainDAO;
 import eventstickets.helpers.UserHelper;
+import eventstickets.models.Place;
 import eventstickets.models.Role;
 import eventstickets.models.User;
 
@@ -34,19 +36,82 @@ public class UserDAO extends MainDAO {
 		}
 		return user;
 	}
-	public void create (User user){
+	public boolean createSignUp (User user){
 		EntityManager manager = openSession();
 		try{
 			user.setRole(Role.PARTICIPANT);
 			user.setPassword(UserHelper.getMD5(user.getPassword()));
 			user.setCreatedAt(new Date());
+			user.setUpdatedAt(new Date());
 			manager.getTransaction().begin();
 			manager.persist(user);
 			manager.getTransaction().commit();
-		}catch (Exception e){
+			return true;
+		} catch (Exception e){
 			manager.getTransaction().rollback();
-		}finally{
+			return false;
+		} finally{
 			manager.close();
 		}
+	}
+	public boolean create (User user){
+		EntityManager manager = openSession();
+		try{
+			user.setPassword(UserHelper.getMD5(user.getPassword()));
+			user.setCreatedAt(new Date());
+			user.setUpdatedAt(new Date());
+			manager.getTransaction().begin();
+			manager.persist(user);
+			manager.getTransaction().commit();
+			return true;
+		} catch (Exception e){
+			manager.getTransaction().rollback();
+			return false;
+		} finally {
+			manager.close();
+		}
+	}
+	
+	public boolean destroy(Integer id) {
+		EntityManager manager = openSession();
+		try {
+			manager.getTransaction().begin();
+			User user = manager.find(User.class, id);
+			manager.remove(manager.contains(user) ? user : manager.merge(user));
+			manager.getTransaction().commit();
+			return true;
+		} catch (Exception e) {
+			manager.getTransaction().rollback();
+			return false;
+		} finally {
+			manager.close();
+		}
+	}
+	
+	public boolean update(User user) {
+		EntityManager manager = openSession();
+		try {
+			manager.getTransaction().begin();
+			user.setPassword(UserHelper.getMD5(user.getPassword()));
+			user.setUpdatedAt(new Date());
+		    manager.merge(user);
+		    manager.getTransaction().commit();
+		    return true;
+		} catch (Exception e) {
+			manager.getTransaction().rollback();
+			return false;
+		} finally {
+			manager.close();
+		}
+	}
+	
+	public List<User> all() {
+		EntityManager manager = openSession();
+		List<User> users = manager.createQuery("from eventstickets.models.User").getResultList();
+		return users;
+	}
+	public User find(Integer id) {
+		EntityManager manager = openSession();
+		return manager.find(User.class, id);
 	}
 }
