@@ -4,13 +4,14 @@ import java.io.Serializable;
 
 import javax.faces.bean.*;
 
-import eventstickets.dao.PlaceDAO;
+
 import eventstickets.dao.UserDAO;
 import eventstickets.models.User;
 
 @ManagedBean (name = "userMB")
 @ViewScoped
-public class UserMB{
+public class UserMB implements Serializable{
+	private static final long serialVersionUID = 1L;
 	//private static final long serialVersionUID = 1L;
 	private User user = new User();
 	
@@ -26,7 +27,7 @@ public class UserMB{
 		UserDAO dao = new UserDAO();
 		
 		if (dao.createSignUp(user)) {
-			return "login?faces-redirect=true";
+			return "login.jsp";
 		} else {
 			return "SignUp";
 		}

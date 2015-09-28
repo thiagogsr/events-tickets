@@ -6,9 +6,8 @@ import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
 
-import eventstickets.dao.PlaceDAO;
+
 import eventstickets.dao.UserDAO;
-import eventstickets.models.Place;
 import eventstickets.models.Role;
 import eventstickets.models.User;
 
