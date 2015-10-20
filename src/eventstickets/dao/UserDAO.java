@@ -109,6 +109,14 @@ public class UserDAO extends MainDAO {
 		List<User> users = manager.createQuery("from eventstickets.models.User").getResultList();
 		return users;
 	}
+	
+	public List<User> byRole(Role role) {
+		EntityManager manager = openSession();
+		Query userQuery = manager.createQuery("from eventstickets.models.User user where user.role = :role");
+		userQuery.setParameter("role", role);
+		List<User> users = userQuery.getResultList();
+		return users;
+	}
 
 	public User find(Integer id) {
 		EntityManager manager = openSession();
