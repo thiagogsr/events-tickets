@@ -8,7 +8,6 @@ import javax.persistence.Query;
 
 import eventstickets.dao.MainDAO;
 import eventstickets.helpers.UserHelper;
-import eventstickets.models.Place;
 import eventstickets.models.Role;
 import eventstickets.models.User;
 
@@ -36,7 +35,7 @@ public class UserDAO extends MainDAO {
 		}
 		return user;
 	}
-	public boolean createSignUp (User user){
+	public boolean register(User user){
 		EntityManager manager = openSession();
 		try{
 			user.setRole(Role.PARTICIPANT);
@@ -54,7 +53,7 @@ public class UserDAO extends MainDAO {
 			manager.close();
 		}
 	}
-	public boolean create (User user){
+	public boolean create(User user){
 		EntityManager manager = openSession();
 		try{
 			user.setPassword(UserHelper.getMD5(user.getPassword()));
@@ -110,6 +109,7 @@ public class UserDAO extends MainDAO {
 		List<User> users = manager.createQuery("from eventstickets.models.User").getResultList();
 		return users;
 	}
+
 	public User find(Integer id) {
 		EntityManager manager = openSession();
 		return manager.find(User.class, id);
