@@ -8,6 +8,7 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>eventstickets.models.Place</class>
         <class>eventstickets.models.User</class>
+        <class>eventstickets.models.Talk</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
