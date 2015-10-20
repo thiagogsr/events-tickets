@@ -1,35 +1,81 @@
 package eventstickets.controllers;
 
 import java.io.Serializable;
+import java.util.List;
 
-import javax.faces.bean.*;
+import javax.enterprise.context.RequestScoped;
+import javax.faces.bean.ManagedBean;
+
 
 
 import eventstickets.dao.UserDAO;
+import eventstickets.models.Role;
 import eventstickets.models.User;
 
-@ManagedBean (name = "userMB")
-@ViewScoped
-public class UserMB implements Serializable{
+@ManagedBean(name="userMB")
+@RequestScoped
+public class UserMB extends AuthenticateUser implements Serializable{
 	private static final long serialVersionUID = 1L;
-	//private static final long serialVersionUID = 1L;
 	private User user = new User();
-	
-	public User getUser() {
-		return user;
-	}
+	private Integer id;
 
-	public void setUser(User user) {
-		this.user = user;
+	public List<User> getAll() {
+		return new UserDAO().all();
 	}
 	
 	public String create(){
 		UserDAO dao = new UserDAO();
 		
-		if (dao.createSignUp(user)) {
-			return "login.jsp";
+		if (dao.create(user)) {
+			return "index";
 		} else {
-			return "SignUp";
+			return "new";
 		}
+	}
+	
+	public String edit(){
+		UserDAO dao = new UserDAO();
+		user = dao.find(id);
+		return "edit";
+	}
+	
+	public String update(){
+		UserDAO dao = new UserDAO();
+		User oldUser = dao.find(user.getId());
+		oldUser.setEmail(user.getEmail());
+		oldUser.setMobilePhoneNumber(user.getMobilePhoneNumber());
+		oldUser.setName(user.getName());
+		oldUser.setPhoneNumber(user.getPhoneNumber());
+		oldUser.setRole(user.getRole());
+		oldUser.setUsername(user.getUsername());
+		oldUser.setPassword(user.getPassword());
+		
+		if (dao.update(oldUser)) {
+			return "index";
+		} else {
+			return "edit";
+		}
+	}
+	
+	public String destroy() {
+		UserDAO dao = new UserDAO();
+		dao.destroy(id);
+		return "index";
+	}
+	
+	public Role[] getRole(){
+		return Role.values();
+	}
+	
+	public User getUser() {
+		return user;
+	}
+	
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 }

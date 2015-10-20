@@ -12,7 +12,7 @@
 				<a href="./new.xhtml" class="btn btn-primary" title="Criar usuário">Novo</a>
 
 				<h:form>
-					<h:dataTable value="#{UserCurrentMB.all}" var="u"
+					<h:dataTable value="#{userMB.all}" var="u"
 						styleClass="table">
 						<h:column>
 							<f:facet name="header">Id</f:facet>
@@ -37,15 +37,13 @@
 								#{u.role}
 							</h:column>
 						<h:column>
-							<h:commandLink action="#{UserCurrentMB.edit}" value="Editar">
-								<f:setPropertyActionListener target="#{UserCurrentMB.id}"
-									value="#{u.id}" />
+							<h:commandLink action="#{userMB.edit}" value="Editar">
+								<f:setPropertyActionListener target="#{userMB.id}" value="#{u.id}" />
 							</h:commandLink>
 						</h:column>
 						<h:column>
-							<h:commandLink action="#{UserCurrentMB.destroy}" value="Remover">
-								<f:setPropertyActionListener target="#{UserCurrentMB.id}"
-									value="#{u.id}" />
+							<h:commandLink action="#{userMB.destroy}" value="Remover">
+								<f:setPropertyActionListener target="#{userMB.id}" value="#{u.id}" />
 							</h:commandLink>
 						</h:column>
 					</h:dataTable>
