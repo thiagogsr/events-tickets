@@ -10,6 +10,7 @@ import eventstickets.dao.PlaceDAO;
 import eventstickets.dao.TalkDAO;
 import eventstickets.dao.UserDAO;
 import eventstickets.models.Place;
+import eventstickets.models.Role;
 import eventstickets.models.Talk;
 import eventstickets.models.User;
 
@@ -75,7 +76,7 @@ public class TalkMB implements Serializable {
 
 	public List<User> getUsers() {
 		UserDAO userDAO = new UserDAO();
-		return userDAO.all();
+		return userDAO.byRole(Role.SPEAKER);
 	}
 
 	public void setUsers(List<User> users) {
