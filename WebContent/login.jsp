@@ -6,10 +6,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Entrar - Events Tickets</title>
 
-<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"
-	type="text/css" />
-<link href="vendor/bootstrap/css/bootstrap-theme.min.css"
-	rel="stylesheet" type="text/css" />
+<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="vendor/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css" />
 
 </head>
 <body>
@@ -25,17 +23,16 @@
 				%>
 				<form action="signIn" method="post">
 					<div class="form-group">
-						<label for="username">Usuário</label> <input type="text"
-							name="username" id="username" class="form-control" />
+						<label for="username">Usuário</label>
+						<input type="text" name="username" id="username" class="form-control" />
 					</div>
 					<div class="form-group">
-						<label for="password">Senha</label> <input type="password"
-							name="password" id="password" class="form-control" />
+						<label for="password">Senha</label>
+						<input type="password" name="password" id="password" class="form-control" />
 					</div>
 					<div class="form-group">
-						<input type="submit" value="Entrar"
-							class="btn btn-primary form-control" /> 
-						<a href="SignUp.xhtml">Cadastre-se</a>
+						<input type="submit" value="Entrar" class="btn btn-primary form-control" /> 
+						<a href="signUp.xhtml">Cadastre-se</a>
 					</div>
 				</form>
 			</div>
