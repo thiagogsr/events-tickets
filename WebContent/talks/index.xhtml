@@ -11,6 +11,45 @@
 			<div class="col-md-12">
 				<h2>Palestras</h2>
 				<a href="./new.xhtml" class="btn btn-primary" title="Criar palestra">Novo</a>
+
+				<h:form>
+					<h:dataTable value="#{talkMB.all()}" var="u" styleClass="table">
+						<h:column>
+							<f:facet name="header">Id</f:facet>
+					    		#{u.id}
+					</h:column>
+						<h:column>
+							<f:facet name="header">Título</f:facet>
+					    		#{u.topic}
+					</h:column>
+						<h:column>
+							<f:facet name="header">Palestrante</f:facet>
+					    		#{u.speaker.name}
+					</h:column>
+						<h:column>
+							<f:facet name="header">Lugar</f:facet>
+					    		#{u.place.title}
+					</h:column>
+						<h:column>
+							<f:facet name="header">Data início</f:facet>
+					    		#{u.startDate}
+					</h:column>
+						<h:column>
+							<f:facet name="header">Data fim</f:facet>
+					    		#{u.endDate}
+					</h:column>
+						<h:column>
+							<h:commandLink action="#{talkMB.edit}" value="Editar">
+								<f:setPropertyActionListener target="#{talkMB.id}" value="#{u.id}" />
+							</h:commandLink>
+						</h:column>
+						<h:column>
+							<h:commandLink action="#{talkMB.destroy}" value="Remover">
+								<f:setPropertyActionListener target="#{talkMB.id}" value="#{u.id}" />
+							</h:commandLink>
+						</h:column>
+					</h:dataTable>
+				</h:form>
 			</div>
 		</div>
 	</ui:define>
