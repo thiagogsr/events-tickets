@@ -5,63 +5,66 @@
 	xmlns:h="http://java.sun.com/jsf/html">
 
 <h:head>
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-	<link href="vendor/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+	<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"
+		type="text/css" />
+	<link href="vendor/bootstrap/css/bootstrap-theme.min.css"
+		rel="stylesheet" type="text/css" />
 </h:head>
 <body>
 	<div class="container">
-		<div class="row">
-			<div class="col-md-10 col-sm-offset-2">
-				<h:form>
-					<div class="form-body">
-						<div class="form-group col-md-6">
+		<div class="col-md-10 col-sm-offset-2">
+			<h2>Cadastrar Usuário</h2>
+			<h:form>
+				<div class="form-body">
+					<div class="form-group row">
+						<div class="col-md-6">
 							<label>Nome</label>
-							<h:inputText styleClass="form-control"
-								value="#{publicUserMB.user.name}" id="name" required="true"
-								requiredMessage="*Informe seu nome" />
+							<h:inputText styleClass="form-control" value="#{publicUserMB.user.name}" id="name" 
+								required="true" requiredMessage="*Informe seu nome" />
 							<h:message id="m_name" for="name" style="color:#D74937;" />
 						</div>
-						<div class="form-group col-md-6">
+
+						<div class="col-md-6">
 							<label>Email</label>
-							<h:inputText styleClass="form-control"
-								value="#{publicUserMB.user.email}" required="true" id="email"
-								validatorMessage="email inválido."
-								requiredMessage="* Informe seu email.">
+							<h:inputText styleClass="form-control" value="#{publicUserMB.user.email}" 
+								required="true" id="email" validatorMessage="email inválido." requiredMessage="* Informe seu email.">
 							</h:inputText>
 							<h:message id="m_email" for="email" style="color:#D74937;" />
 						</div>
-						<div class="form-group col-md-6">
+					</div>
+
+					<div class="form-group row">
+						<div class="col-md-6">
 							<label>Telefone</label>
-							<h:inputText value="#{publicUserMB.user.phoneNumber}"
-								styleClass="form-control" id="phoneNumber" required="true"
-								requiredMessage="*Informe seu Telefone" />
-							<h:message id="m_phoneNumber" for="phoneNumber"
-								style="color:#D74937;" />
+							<h:inputText value="#{publicUserMB.user.phoneNumber}" styleClass="form-control phone" 
+								id="phoneNumber" required="true" requiredMessage="*Informe seu Telefone" />
+							<h:message id="m_phoneNumber" for="phoneNumber" style="color:#D74937;" />
 						</div>
-						<div class="form-group col-md-6">
+
+						<div class="col-md-6">
 							<label>Celular</label>
 							<h:inputText value="#{publicUserMB.user.mobilePhoneNumber}"
-								styleClass="form-control" id="mobilePhoneNumber" />
+								styleClass="form-control phone" id="mobilePhoneNumber" />
 						</div>
-						<div class="form-group col-md-6">
+					</div>
+					<div class="form-group row">
+						<div class="col-md-6">
 							<label for="username">Usuário</label>
-							<h:inputText required="true"
-								requiredMessage="*Informe seu usuário" id="username"
+							<h:inputText required="true" requiredMessage="*Informe seu usuário" id="username"
 								styleClass="form-control" value="#{publicUserMB.user.username}" />
 							<h:message id="m_username" for="username" style="color:#D74937;" />
 						</div>
-						<div class="form-group col-md-6">
+
+						<div class="col-md-6">
 							<label for="password">Senha</label>
-							<h:inputSecret styleClass="form-control"
-								value="#{publicUserMB.user.password}" id="password" required="true"
-								requiredMessage="Informe sua Senha" />
+							<h:inputSecret styleClass="form-control" value="#{publicUserMB.user.password}" 
+								id="password" required="true" requiredMessage="Informe sua Senha" />
 							<h:message id="m_password" for="password" style="color:#D74937;" />
 						</div>
 					</div>
-					<h:commandButton class="btn btn-primary"
-						action="#{publicUserMB.create}" value="Salvar"></h:commandButton>
-				</h:form>
-			</div>
+				</div>
+				<h:commandButton class="btn btn-primary" action="#{publicUserMB.create}" value="Salvar"></h:commandButton>
+			</h:form>
 		</div>
 	</div>
 </body>
