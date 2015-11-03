@@ -16,6 +16,8 @@ public class Talk {
 	private Date startDate;
 	private Date endDate;
 	private String topic;
+	private User createdBy;
+	private Date createdAt;
 	
 	public String getTopic() {
 		return topic;
@@ -69,5 +71,23 @@ public class Talk {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	
+	@ManyToOne
+    @JoinColumn(name="createdBy")
+	public User getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(User createdBy) {
+		this.createdBy = createdBy;
+	}
+	
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
 	}
 }
