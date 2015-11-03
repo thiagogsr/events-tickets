@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<ui:composition template="../layout.xhtml">
+	<ui:define name="content">
+		<div class="row">
+			<div class="col-md-12">
+				<h2>Eventos</h2>
+				<a href="./new.xhtml" class="btn btn-primary" title="Criar evento">Novo</a>
+
+				<h:form>
+					<h:dataTable value="#{eventMB.all}" var="u" styleClass="table">
+						<h:column>
+							<f:facet name="header">Id</f:facet>
+					    		#{u.id}
+					</h:column>
+						<h:column>
+							<f:facet name="header">Título</f:facet>
+					    		#{u.title}
+					</h:column>
+						<h:column>
+							<f:facet name="header">Local</f:facet>
+					    		#{u.place.title}
+					</h:column>
+						<h:column>
+							<f:facet name="header">Preço</f:facet>
+					    		#{u.price}
+					</h:column>
+					<h:column>
+							<f:facet name="header">Data início</f:facet>
+					    		<h:outputText value="#{u.startDate}">
+								<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+					</h:column>
+						<h:column>
+							<f:facet name="header">Data fim</f:facet>
+					    		<h:outputText value="#{u.endDate}">
+								<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+					</h:column>
+					<h:column>
+							<f:facet name="header">Data início de inscrições</f:facet>
+							<h:outputText value="#{u.inscriptionsStartDate}">
+								<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+					</h:column>
+					<h:column>
+							<f:facet name="header">Data fim de inscrições</f:facet>
+					    		<h:outputText value="#{u.inscriptionsEndDate}">
+								<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+					</h:column>
+					<h:column>
+							<f:facet name="header">Limite de inscritos</f:facet>
+					    		#{u.inscriptionsLimit}
+					</h:column>
+						<h:column>
+							<h:commandLink action="#{eventMB.edit}" value="Editar">
+								<f:setPropertyActionListener target="#{eventMB.id}" value="#{u.id}" />
+							</h:commandLink>
+						</h:column>
+						<h:column>
+							<h:commandLink action="#{eventMB.destroy}" value="Remover">
+								<f:setPropertyActionListener target="#{eventMB.id}" value="#{u.id}" />
+							</h:commandLink>
+						</h:column>
+					</h:dataTable>
+				</h:form>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>
