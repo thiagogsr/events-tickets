@@ -10,6 +10,8 @@ public class TalkDAO extends MainDAO{
 		EntityManager manager = openSession();
 		try{
 			manager.getTransaction().begin();
+			talk.setCreatedBy(currentUser);
+			talk.setCreatedAt(new Date());
 			manager.persist(talk);
 			manager.getTransaction().commit();
 			return true;
