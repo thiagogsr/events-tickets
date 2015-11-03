@@ -16,6 +16,7 @@ public class Talk {
 	private Date startDate;
 	private Date endDate;
 	private String topic;
+	private Event event;
 	
 	public String getTopic() {
 		return topic;
@@ -70,4 +71,16 @@ public class Talk {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	
+	@ManyToOne
+    @JoinColumn(name="eventId")
+	public Event getEvent() {
+		return event;
+	}
+
+	public void setEvent(Event event) {
+		this.event = event;
+	}
+	
+	
 }
