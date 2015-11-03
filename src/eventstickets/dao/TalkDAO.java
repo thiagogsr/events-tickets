@@ -1,15 +1,21 @@
 package eventstickets.dao;
 
+import java.util.Date;
 import java.util.List;
+
 import javax.persistence.EntityManager;
+
 import eventstickets.models.Talk;
+import eventstickets.models.User;
 
 public class TalkDAO extends MainDAO{
 
-	public boolean create (Talk talk){
+	public boolean create (Talk talk, User currentUser){
 		EntityManager manager = openSession();
 		try{
 			manager.getTransaction().begin();
+			talk.setCreatedBy(currentUser);
+			talk.setCreatedAt(new Date());
 			manager.persist(talk);
 			manager.getTransaction().commit();
 			return true;

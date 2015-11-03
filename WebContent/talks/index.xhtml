@@ -17,27 +17,37 @@
 						<h:column>
 							<f:facet name="header">Id</f:facet>
 					    		#{u.id}
-					</h:column>
+						</h:column>
 						<h:column>
 							<f:facet name="header">Título</f:facet>
 					    		#{u.topic}
-					</h:column>
+						</h:column>
 						<h:column>
 							<f:facet name="header">Palestrante</f:facet>
 					    		#{u.speaker.name}
-					</h:column>
+						</h:column>
 						<h:column>
 							<f:facet name="header">Lugar</f:facet>
 					    		#{u.place.title}
-					</h:column>
+						</h:column>
 						<h:column>
 							<f:facet name="header">Data início</f:facet>
 					    		#{u.startDate}
-					</h:column>
+						</h:column>
 						<h:column>
 							<f:facet name="header">Data fim</f:facet>
 					    		#{u.endDate}
-					</h:column>
+					    </h:column>
+					    <h:column>
+							<f:facet name="header">Criado por</f:facet>
+					    		#{u.createdBy.name}
+						</h:column>
+						<h:column>
+							<f:facet name="header">Criado em</f:facet>
+							<h:outputText value="#{u.createdAt}" >
+								<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+							</h:outputText>
+						</h:column>
 						<h:column>
 							<h:commandLink action="#{talkMB.edit}" value="Editar">
 								<f:setPropertyActionListener target="#{talkMB.id}" value="#{u.id}" />

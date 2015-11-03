@@ -35,7 +35,7 @@ public class TalkMB extends AuthenticateUser implements Serializable {
 		talk.setSpeaker(fetchUser());
 		talk.setPlace(fetchPlace());
 		
-		if (dao.create(talk)) {
+		if (dao.create(talk, getCurrentUser())) {
 			return "index";
 		} else {
 			return "new";
