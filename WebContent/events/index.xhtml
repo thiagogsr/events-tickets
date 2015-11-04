@@ -33,22 +33,26 @@
 					<h:column>
 							<f:facet name="header">Data início</f:facet>
 					    		<h:outputText value="#{u.startDate}">
-								<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+									<f:convertDateTime pattern="dd/MM/yyyy" />
+								</h:outputText>
 					</h:column>
 						<h:column>
 							<f:facet name="header">Data fim</f:facet>
 					    		<h:outputText value="#{u.endDate}">
-								<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+									<f:convertDateTime pattern="dd/MM/yyyy" />
+								</h:outputText>
 					</h:column>
 					<h:column>
 							<f:facet name="header">Data início de inscrições</f:facet>
 							<h:outputText value="#{u.inscriptionsStartDate}">
-								<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:outputText>
 					</h:column>
 					<h:column>
 							<f:facet name="header">Data fim de inscrições</f:facet>
 					    		<h:outputText value="#{u.inscriptionsEndDate}">
-								<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+									<f:convertDateTime pattern="dd/MM/yyyy" />
+								</h:outputText>
 					</h:column>
 					<h:column>
 							<f:facet name="header">Limite de inscritos</f:facet>
