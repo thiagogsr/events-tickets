@@ -8,9 +8,7 @@ import javax.persistence.EntityManager;
 import eventstickets.models.Event;
 import eventstickets.models.User;
 
-
-public class EventDAO extends MainDAO{
-
+public class EventDAO extends MainDAO {
 	public boolean create (Event event, User currentUser){
 		EntityManager manager = openSession();
 		try{
@@ -27,6 +25,7 @@ public class EventDAO extends MainDAO{
 			manager.close();
 		}
 	}
+
 	public boolean destroy(Integer id) {
 		EntityManager manager = openSession();
 		try {
@@ -68,6 +67,5 @@ public class EventDAO extends MainDAO{
 		EntityManager manager = openSession();
 		List<Event> events = manager.createQuery("from eventstickets.models.Event").getResultList();
 		return events;
-	}
-	
+	}	
 }

@@ -8,9 +8,8 @@ import javax.persistence.EntityManager;
 import eventstickets.models.Talk;
 import eventstickets.models.User;
 
-public class TalkDAO extends MainDAO{
-
-	public boolean create (Talk talk, User currentUser){
+public class TalkDAO extends MainDAO {
+	public boolean create(Talk talk, User currentUser) {
 		EntityManager manager = openSession();
 		try{
 			manager.getTransaction().begin();
@@ -26,6 +25,7 @@ public class TalkDAO extends MainDAO{
 			manager.close();
 		}
 	}
+
 	public boolean destroy(Integer id) {
 		EntityManager manager = openSession();
 		try {
@@ -67,5 +67,4 @@ public class TalkDAO extends MainDAO{
 		List<Talk> talks = manager.createQuery("from eventstickets.models.Talk").getResultList();
 		return talks;
 	}
-	
 }
