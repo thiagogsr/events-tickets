@@ -10,6 +10,7 @@
         <class>eventstickets.models.User</class>
         <class>eventstickets.models.Talk</class>
         <class>eventstickets.models.Event</class>
+        <class>eventstickets.models.MiniCourse</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
