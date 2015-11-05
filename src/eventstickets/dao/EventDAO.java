@@ -14,7 +14,7 @@ public class EventDAO extends MainDAO {
 		try{
 			manager.getTransaction().begin();
 			event.setCreatedBy(currentUser);
-			event.setUpdatedAt(new Date());
+			event.setCreatedAt(new Date());
 			manager.persist(event);
 			manager.getTransaction().commit();
 			return true;

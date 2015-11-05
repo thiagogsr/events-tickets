@@ -40,6 +40,7 @@ public class EventMB extends AuthenticateUser implements Serializable {
 	public String edit() {
 		EventDAO dao = new EventDAO();
 		event = dao.find(id);
+		placeId = event.getPlace().getId();
 		return "edit";
 	}
 	
