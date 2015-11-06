@@ -22,24 +22,32 @@ public class PlaceMB extends AuthenticateUser implements Serializable {
 		return new PlaceDAO().all();
 	}
 	
-	public String create() {
+	public String save() {
+		if(place.getId() == null) {
+			return create();
+		} else {
+			return update();
+		}
+	}
+	
+	private String create() {
 		PlaceDAO dao = new PlaceDAO();
 		
 		if (dao.create(place, getCurrentUser())) {
 			MessageHelper.addMensage("Lugar criado com sucesso", FacesMessage.SEVERITY_INFO);
 			return "index";
 		} else {
-			return "new";
+			return "form";
 		}
 	}
 	
 	public String edit() {
 		PlaceDAO dao = new PlaceDAO();
 		place = dao.find(id);
-		return "edit";
+		return "form";
 	}
 	
-	public String update() {
+	private String update() {
 		PlaceDAO dao = new PlaceDAO();
 		Place oldPlace = dao.find(place.getId());
 		oldPlace.setTitle(place.getTitle());
@@ -48,7 +56,7 @@ public class PlaceMB extends AuthenticateUser implements Serializable {
 			MessageHelper.addMensage("Lugar atualizado com sucesso", FacesMessage.SEVERITY_INFO);
 			return "index";
 		} else {
-			return "edit";
+			return "form";
 		}
 	}
 	

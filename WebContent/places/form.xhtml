@@ -7,15 +7,18 @@
 
 	<ui:composition template="../layout.xhtml">
 		<ui:define name="content">
-			<h2>Novo Lugar</h2>
+			<h2>Lugar</h2>
 
 			<h:form method="post">
+				<h:inputHidden value="#{placeMB.place.id}" />
+			
 				<div class="form-group">
 	    			<label for="title">Título</label>
 	    			<h:inputText styleClass="form-control" value="#{placeMB.place.title}" id="title" required="true"
 						requiredMessage="Informe o título" />
 	  			</div>
-	  			<h:commandButton class="btn btn-primary" action="#{placeMB.create}" value="Salvar"></h:commandButton>
+
+	  			<h:commandButton class="btn btn-primary" action="#{placeMB.save}" value="Salvar"></h:commandButton>
 	  			<a href="./index.xhtml" title="Listar todos" class="btn btn-default">Cancelar</a>
 			</h:form>
 		</ui:define>
