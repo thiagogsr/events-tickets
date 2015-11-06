@@ -28,7 +28,7 @@ public class TalkMB extends AuthenticateUser implements Serializable {
 	private Integer eventId;
 	private Integer id;
 
-	public List<Talk> all(){
+	public List<Talk> getAll(){
 		TalkDAO dao = new TalkDAO();
 		return dao.all();
 	}
