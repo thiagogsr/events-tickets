@@ -6,21 +6,24 @@
 
 <ui:composition template="../layout.xhtml">
 	<ui:define name="content">
-		<h2>Editar Usuário</h2>
+		<h2>Usuário</h2>
 
 		<h:form method="post">
 			<h:inputHidden value="#{userMB.user.id}" />
+
 			<div class="form-group row">
 				<div class="col-md-6">
 					<label>Nome</label>
-					<h:inputText styleClass="form-control" value="#{userMB.user.name}"
-						id="name" required="true" requiredMessage="*Informe seu nome" />
+					<h:inputText styleClass="form-control"
+						value="#{userMB.user.name}" id="name" required="true"
+						requiredMessage="*Informe seu nome" />
 					<h:message id="m_name" for="name" style="color:#D74937;" />
 				</div>
 				<div class="col-md-6">
 					<label>Email</label>
-					<h:inputText styleClass="form-control" value="#{userMB.user.email}"
-						required="true" id="email" validatorMessage="email inválido."
+					<h:inputText styleClass="form-control"
+						value="#{userMB.user.email}" required="true" id="email"
+						validatorMessage="email inválido."
 						requiredMessage="* Informe seu email.">
 						<f:validateRegex pattern="[a-zA-Z0-9\-\_\.]+@[a-zA-Z0-9\-\_\.]+" />
 					</h:inputText>
@@ -33,11 +36,13 @@
 					<h:inputText value="#{userMB.user.phoneNumber}"
 						styleClass="form-control phone" id="phoneNumber" required="true"
 						requiredMessage="*Informe seu Telefone" />
-					<h:message id="m_phoneNumber" for="phoneNumber" style="color:#D74937;" />
+					<h:message id="m_phoneNumber" for="phoneNumber"
+						style="color:#D74937;" />
 				</div>
 				<div class="col-md-6">
 					<label>Celular</label>
-					<h:inputText value="#{userMB.user.mobilePhoneNumber}" styleClass="form-control phone" id="mobilePhoneNumber" />
+					<h:inputText value="#{userMB.user.mobilePhoneNumber}"
+						styleClass="form-control phone" id="mobilePhoneNumber" />
 				</div>
 			</div>
 			<div class="form-group row">
@@ -48,15 +53,15 @@
 						value="#{userMB.user.username}" />
 					<h:message id="m_username" for="username" style="color:#D74937;" />
 				</div>
-
+				
 				<div class="col-md-4">
 					<label for="password">Senha</label>
 					<h:inputSecret styleClass="form-control"
-						value="#{userMB.user.password}" id="password" required="true"
-						requiredMessage="Informe sua Senha" />
+						value="#{userMB.user.password}" id="password"
+						required="true" requiredMessage="Informe sua Senha" />
 					<h:message id="m_password" for="password" style="color:#D74937;" />
 				</div>
-
+				
 				<div class="col-md-4">
 					<label for="password">Perfil</label>
 					<h:selectOneMenu styleClass="form-control" value="#{userMB.user.role}">
@@ -64,8 +69,10 @@
 					</h:selectOneMenu>
 				</div>
 			</div>
-			<h:commandButton class="btn btn-primary" action="#{userMB.update}" value="Atualizar"></h:commandButton>
-			<a href="./index.xhtml" title="Listar todos" class="btn btn-default">Cancelar</a>
+			
+			<div class="form-group">
+				<h:commandButton class="btn btn-primary" action="#{userMB.save}" value="Salvar"></h:commandButton>
+			</div>
 		</h:form>
 	</ui:define>
 </ui:composition>

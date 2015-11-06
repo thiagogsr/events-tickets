@@ -23,23 +23,31 @@ public class UserMB extends AuthenticateUser implements Serializable{
 		return new UserDAO().all();
 	}
 	
-	public String create(){
+	public String save() {
+		if(user.getId() == null) {
+			return create();
+		} else {
+			return update();
+		}
+	}
+	
+	private String create(){
 		UserDAO dao = new UserDAO();
 		
 		if (dao.create(user)) {
 			return "index";
 		} else {
-			return "new";
+			return "form";
 		}
 	}
 	
 	public String edit(){
 		UserDAO dao = new UserDAO();
 		user = dao.find(id);
-		return "edit";
+		return "form";
 	}
 	
-	public String update(){
+	private String update(){
 		UserDAO dao = new UserDAO();
 		User oldUser = dao.find(user.getId());
 		oldUser.setEmail(user.getEmail());
@@ -53,7 +61,7 @@ public class UserMB extends AuthenticateUser implements Serializable{
 		if (dao.update(oldUser)) {
 			return "index";
 		} else {
-			return "edit";
+			return "form";
 		}
 	}
 	
