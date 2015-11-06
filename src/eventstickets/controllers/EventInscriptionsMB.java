@@ -27,8 +27,9 @@ public class EventInscriptionsMB extends AuthenticateUser implements Serializabl
 			eventInscriptions.setUser(getCurrentUser());
 			eventInscriptions.setEvent(event);
 			dao.create(eventInscriptions);
+			MessageHelper.addMensage("Inscrição no evento " + event.getTitle() + " realizada com sucesso.", FacesMessage.SEVERITY_INFO);
 		} else {
-			MessageHelper.addMensage("Limite de vagas atingido para esse evento", FacesMessage.SEVERITY_INFO);
+			MessageHelper.addMensage("Não há mais vagas no evento " + event.getTitle() + ".", FacesMessage.SEVERITY_ERROR);
 		}
 	}
 	
