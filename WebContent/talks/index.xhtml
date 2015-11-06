@@ -13,7 +13,7 @@
 				<a href="./form.xhtml" class="btn btn-primary" title="Criar palestra">Novo</a>
 
 				<h:form>
-					<h:dataTable value="#{talkMB.all()}" var="u" styleClass="table">
+					<h:dataTable value="#{talkMB.all}" var="u" styleClass="table">
 						<h:column>
 							<f:facet name="header">Id</f:facet>
 					    		#{u.id}
@@ -32,12 +32,20 @@
 						</h:column>
 						<h:column>
 							<f:facet name="header">Data início</f:facet>
-					    		#{u.startDate}
+					    		<h:outputText value="#{u.startDate}">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:outputText>
 						</h:column>
 						<h:column>
 							<f:facet name="header">Data fim</f:facet>
-					    		#{u.endDate}
+					    		<h:outputText value="#{u.endDate}">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:outputText>
 					    </h:column>
+					    <h:column>
+							<f:facet name="header">Evento</f:facet>
+					    		#{u.event.title}
+						</h:column>
 					    <h:column>
 							<f:facet name="header">Criado por</f:facet>
 					    		#{u.createdBy.name}
@@ -45,7 +53,7 @@
 						<h:column>
 							<f:facet name="header">Criado em</f:facet>
 							<h:outputText value="#{u.createdAt}" >
-								<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+								<f:convertDateTime pattern="dd/MM/yyyy" />
 							</h:outputText>
 						</h:column>
 						<h:column>

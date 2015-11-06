@@ -19,6 +19,7 @@ public class Talk {
 	private Event event;
 	private User createdBy;
 	private Date createdAt;
+	private String description;
 	
 	public String getTopic() {
 		return topic;
@@ -84,6 +85,7 @@ public class Talk {
 		this.event = event;
 	}
 	
+	@ManyToOne
     @JoinColumn(name="createdBy")
 	public User getCreatedBy() {
 		return createdBy;
@@ -100,4 +102,13 @@ public class Talk {
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
 }
