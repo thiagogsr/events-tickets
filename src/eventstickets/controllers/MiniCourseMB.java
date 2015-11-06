@@ -26,7 +26,15 @@ public class MiniCourseMB extends AuthenticateUser implements Serializable {
 		return new MiniCourseDAO().all();
 	}
 
-	public String create() {
+	public String save() {
+		if(miniCourse.getId() == null) {
+			return create();
+		} else {
+			return update();
+		}
+	}
+
+	private String create() {
 		MiniCourseDAO dao = new MiniCourseDAO();
 		miniCourse.setSpeaker(fetchUser());
 		miniCourse.setPlace(fetchPlace());
@@ -34,17 +42,17 @@ public class MiniCourseMB extends AuthenticateUser implements Serializable {
 		if (dao.create(miniCourse, getCurrentUser())) {
 			return "index";
 		} else {
-			return "new";
+			return "form";
 		}
 	}
 
 	public String edit() {
 		MiniCourseDAO dao = new MiniCourseDAO();
 		miniCourse = dao.find(id);
-		return "edit";
+		return "form";
 	}
 
-	public String update() {
+	private String update() {
 		MiniCourseDAO dao = new MiniCourseDAO();
 
 		MiniCourse oldMiniCourse = dao.find(miniCourse.getId());
@@ -59,7 +67,7 @@ public class MiniCourseMB extends AuthenticateUser implements Serializable {
 		if (dao.update(oldMiniCourse)) {
 			return "index?faces-redirect=true";
 		} else {
-			return "edit";
+			return "form";
 		}
 	}
 

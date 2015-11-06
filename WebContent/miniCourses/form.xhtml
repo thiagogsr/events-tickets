@@ -6,11 +6,11 @@
 
 	<ui:composition template="../layout.xhtml">
 		<ui:define name="content">
-			<h2>Editar Mini Curso</h2>
+			<h2>Mini Curso</h2>
 
 			<h:form method="post">
 				<h:inputHidden value="#{miniCourseMB.miniCourse.id}" />
-
+			
 				<div class="form-group row">
 					<div class="col-md-6">
 	    				<label for="title">Título</label>
@@ -61,7 +61,7 @@
 					</div>
 				</div>
 
-	  			<h:commandButton class="btn btn-primary" action="#{miniCourseMB.update}" value="Atualizar"></h:commandButton>
+	  			<h:commandButton class="btn btn-primary" action="#{miniCourseMB.save}" value="Salvar"></h:commandButton>
 	  			<a href="./index.xhtml" title="Listar todos" class="btn btn-default">Cancelar</a>
 			</h:form>
 		</ui:define>
