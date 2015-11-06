@@ -12,6 +12,8 @@
 					<a href="./form.xhtml" class="btn btn-primary" title="Criar Mini Curso">Novo</a>
 
 					<h:form>
+						<h:messages errorClass="alert alert-danger" infoClass="alert alert-success" styleClass="messages" />
+
 						<h:dataTable value="#{minicourseMB.all}" var="m" styleClass="table">
 							<h:column>
 								<f:facet name="header">Título</f:facet>

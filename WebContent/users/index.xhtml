@@ -12,6 +12,8 @@
 				<a href="./form.xhtml" class="btn btn-primary" title="Criar usuário">Novo</a>
 
 				<h:form>
+					<h:messages errorClass="alert alert-danger" infoClass="alert alert-success" styleClass="messages" />
+
 					<h:dataTable value="#{userMB.all}" var="u" styleClass="table">
 						<h:column>
 							<f:facet name="header">Criado em</f:facet>

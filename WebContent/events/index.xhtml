@@ -13,6 +13,8 @@
 				<a href="./form.xhtml" class="btn btn-primary" title="Criar evento">Novo</a>
 
 				<h:form>
+					<h:messages errorClass="alert alert-danger" infoClass="alert alert-success" styleClass="messages" />
+
 					<h:dataTable value="#{eventMB.all}" var="u" styleClass="table">
 						<h:column>
 							<f:facet name="header">Título</f:facet>
