@@ -30,7 +30,15 @@ public class TalkMB extends AuthenticateUser implements Serializable {
 		return dao.all();
 	}
 	
-	public String create() {
+	public String save() {
+		if(talk.getId() == null) {
+			return create();
+		} else {
+			return update();
+		}
+	}
+	
+	private String create() {
 		TalkDAO dao = new TalkDAO();
 		talk.setSpeaker(fetchUser());
 		talk.setPlace(fetchPlace());
@@ -38,17 +46,17 @@ public class TalkMB extends AuthenticateUser implements Serializable {
 		if (dao.create(talk, getCurrentUser())) {
 			return "index";
 		} else {
-			return "new";
+			return "form";
 		}
 	}
 	
 	public String edit(){
 		TalkDAO dao = new TalkDAO();
 		talk = dao.find(id);
-		return "edit";
+		return "form";
 	}
 	
-	public String update(){
+	private String update(){
 		TalkDAO dao = new TalkDAO();
 		Talk oldTalk = dao.find(talk.getId());
 		oldTalk.setEndDate(talk.getEndDate());
@@ -60,7 +68,7 @@ public class TalkMB extends AuthenticateUser implements Serializable {
 		if (dao.update(oldTalk)) {
 			return "index";
 		} else {
-			return "edit";
+			return "form";
 		}
 	}
 	

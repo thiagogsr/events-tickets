@@ -1,21 +1,22 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
+
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"> 
+      xmlns:h="http://java.sun.com/jsf/html">
 
 	<ui:composition template="../layout.xhtml">
 		<ui:define name="content">
-			<h2>Editar Palestra</h2>
+			<h2>Palestra</h2>
 
 			<h:form method="post">
 				<h:inputHidden value="#{talkMB.talk.id}" />
+
 				<div class="form-group">
 	    			<label for="title">Título</label>
 	    			<h:inputText styleClass="form-control" value="#{talkMB.talk.topic}" id="title" required="true"
 						requiredMessage="Informe o título" />
 	  			</div>
-	  			
 	  			<label for="speaker">Palestrante</label>
 	  			<h:selectOneMenu class="form-control" id="speaker" value="#{talkMB.speakerId}" required="true" requiredMessage="Informe o palestrante">
 	  				<f:selectItems value="#{talkMB.users}" var="user" itemLabel="#{user.name}" itemValue="#{user.id}"/>
@@ -36,7 +37,7 @@
 			    	<f:convertDateTime pattern="dd/MM/yyyy HH:mm"/> 
 			    </h:inputText>
 			    
-	  			<h:commandButton class="btn btn-primary" action="#{talkMB.update}" value="Atualizar"></h:commandButton>
+	  			<h:commandButton class="btn btn-primary" action="#{talkMB.save}" value="Salvar"></h:commandButton>
 	  			<a href="./index.xhtml" title="Listar todos" class="btn btn-default">Cancelar</a>
 			</h:form>
 		</ui:define>
