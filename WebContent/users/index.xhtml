@@ -12,12 +12,7 @@
 				<a href="./form.xhtml" class="btn btn-primary" title="Criar usuário">Novo</a>
 
 				<h:form>
-					<h:dataTable value="#{userMB.all}" var="u"
-						styleClass="table">
-						<h:column>
-							<f:facet name="header">Id</f:facet>
-					    		#{u.id}
-							</h:column>
+					<h:dataTable value="#{userMB.all}" var="u" styleClass="table">
 						<h:column>
 							<f:facet name="header">Criado em</f:facet>
 							<h:outputText value="#{u.createdAt}">

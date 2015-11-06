@@ -15,10 +15,6 @@
 				<h:form>
 					<h:dataTable value="#{eventMB.all}" var="u" styleClass="table">
 						<h:column>
-							<f:facet name="header">Id</f:facet>
-					    		#{u.id}
-					</h:column>
-						<h:column>
 							<f:facet name="header">Título</f:facet>
 					    		#{u.title}
 					</h:column>
@@ -27,35 +23,35 @@
 					    		#{u.place.title}
 					</h:column>
 						<h:column>
-							<f:facet name="header">Preço</f:facet>
+							<f:facet name="header">Valor</f:facet>
 					    		#{u.price}
 					</h:column>
 					<h:column>
-							<f:facet name="header">Data início</f:facet>
+							<f:facet name="header">Data de início</f:facet>
 					    		<h:outputText value="#{u.startDate}">
 									<f:convertDateTime pattern="dd/MM/yyyy" />
 								</h:outputText>
 					</h:column>
 						<h:column>
-							<f:facet name="header">Data fim</f:facet>
+							<f:facet name="header">Data de término</f:facet>
 					    		<h:outputText value="#{u.endDate}">
 									<f:convertDateTime pattern="dd/MM/yyyy" />
 								</h:outputText>
 					</h:column>
 					<h:column>
-							<f:facet name="header">Data início de inscrições</f:facet>
+							<f:facet name="header">Data de início das inscrições</f:facet>
 							<h:outputText value="#{u.inscriptionsStartDate}">
 								<f:convertDateTime pattern="dd/MM/yyyy" />
 							</h:outputText>
 					</h:column>
 					<h:column>
-							<f:facet name="header">Data fim de inscrições</f:facet>
+							<f:facet name="header">Data de término das inscrições</f:facet>
 					    		<h:outputText value="#{u.inscriptionsEndDate}">
 									<f:convertDateTime pattern="dd/MM/yyyy" />
 								</h:outputText>
 					</h:column>
 					<h:column>
-							<f:facet name="header">Limite de inscritos</f:facet>
+							<f:facet name="header">Limite de inscrições</f:facet>
 					    		#{u.inscriptionsLimit}
 					</h:column>
 						<h:column>

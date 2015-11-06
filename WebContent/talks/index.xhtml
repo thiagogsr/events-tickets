@@ -15,10 +15,6 @@
 				<h:form>
 					<h:dataTable value="#{talkMB.all}" var="u" styleClass="table">
 						<h:column>
-							<f:facet name="header">Id</f:facet>
-					    		#{u.id}
-						</h:column>
-						<h:column>
 							<f:facet name="header">Título</f:facet>
 					    		#{u.topic}
 						</h:column>
@@ -31,13 +27,13 @@
 					    		#{u.place.title}
 						</h:column>
 						<h:column>
-							<f:facet name="header">Data início</f:facet>
+							<f:facet name="header">Data de início</f:facet>
 					    		<h:outputText value="#{u.startDate}">
 								<f:convertDateTime pattern="dd/MM/yyyy" />
 							</h:outputText>
 						</h:column>
 						<h:column>
-							<f:facet name="header">Data fim</f:facet>
+							<f:facet name="header">Data de término</f:facet>
 					    		<h:outputText value="#{u.endDate}">
 								<f:convertDateTime pattern="dd/MM/yyyy" />
 							</h:outputText>
