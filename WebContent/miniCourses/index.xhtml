@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+	<ui:composition template="../layout.xhtml">
+	    <ui:define name="content">
+			<div class="row">
+				<div class="col-md-12">
+					<h2>Mini Cursos</h2>
+					<a href="./new.xhtml" class="btn btn-primary" title="Criar Mini Curso">Novo</a>
+
+					<h:form>
+						<h:dataTable value="#{minicourseMB.all}" var="m" styleClass="table">
+							<h:column>
+								<f:facet name="header">Título</f:facet>
+					    		#{m.title}
+							</h:column>
+							<h:column>
+								<f:facet name="header">Palestrante</f:facet>
+					    		#{m.speaker.name}
+							</h:column>
+							<h:column>
+								<f:facet name="header">Lugar</f:facet>
+					    		#{m.place.title}
+							</h:column>
+							<h:column>
+								<f:facet name="header">Data</f:facet>
+								<h:outputText value="#{m.date}" >
+									<f:convertDateTime pattern="dd/MM/yyyy" />
+								 </h:outputText>
+							</h:column>
+							<h:column>
+								<f:facet name="header">Criado em</f:facet>
+								<h:outputText value="#{m.createdAt}" >
+									<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+								 </h:outputText>
+							</h:column>
+							<h:column>
+								<f:facet name="header">Criado por</f:facet>
+					    		#{m.createdBy.name}
+							</h:column>
+							<h:column>
+								<h:commandLink action="#{minicourseMB.edit}" value="Editar">
+									<f:setPropertyActionListener target="#{minicourseMB.id}" value="#{m.id}" />
+								</h:commandLink>
+							</h:column>
+							<h:column>
+								<h:commandLink action="#{minicourseMB.destroy}" value="Remover">
+									<f:setPropertyActionListener target="#{minicourseMB.id}" value="#{m.id}" />
+								</h:commandLink>
+							</h:column>
+						</h:dataTable>
+					</h:form>
+				</div>
+			</div>
+		</ui:define>
+	</ui:composition>
+</html>
