@@ -2,14 +2,14 @@ package eventstickets.controllers;
 
 import java.io.Serializable;
 
-import javax.faces.bean.*;
 
+import javax.faces.bean.*;
 
 import eventstickets.dao.UserDAO;
 import eventstickets.models.User;
 
 @ManagedBean (name = "publicUserMB")
-@ViewScoped
+@RequestScoped
 public class PublicUserMB implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private User user = new User();
@@ -28,7 +28,7 @@ public class PublicUserMB implements Serializable{
 		if (dao.register(user)) {
 			return "login.jsp";
 		} else {
-			return "SignUp";
+			return "singUp";
 		}
 	}
 }
