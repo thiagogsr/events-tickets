@@ -10,30 +10,57 @@
 			<h2>Nova Palestra</h2>
 
 			<h:form method="post">
-				<div class="form-group">
-	    			<label for="title">Título</label>
-	    			<h:inputText styleClass="form-control" value="#{talkMB.talk.topic}" id="title" required="true"
-						requiredMessage="Informe o título" />
+				<div class="form-group row">
+					<div class="col-md-6">
+		    			<label for="title">Título</label>
+		    			<h:inputText styleClass="form-control" value="#{talkMB.talk.topic}" id="title" required="true"
+							requiredMessage="Informe o título" />
+		  			</div>
+	  			
+	  				<div class="col-md-6">
+			  			<label for="title">Descrição</label>
+			    			<h:inputText styleClass="form-control" value="#{talkMB.talk.description}" required="true"
+								requiredMessage="Informe o título" />
+					</div>
 	  			</div>
-	  			<label for="speaker">Palestrante</label>
-	  			<h:selectOneMenu class="form-control" id="speaker" value="#{talkMB.speakerId}" required="true" requiredMessage="Informe o palestrante">
-	  				<f:selectItems value="#{talkMB.users}" var="user" itemLabel="#{user.name}" itemValue="#{user.id}"/>
-			    </h:selectOneMenu>
+	  			
+	  			<div class="form-group row">
+					<div class="col-md-6">
+			  			<label for="speaker">Palestrante</label>
+			  			<h:selectOneMenu class="form-control" id="speaker" value="#{talkMB.speakerId}" required="true" requiredMessage="Informe o palestrante">
+			  				<f:selectItems value="#{talkMB.users}" var="user" itemLabel="#{user.name}" itemValue="#{user.id}"/>
+					    </h:selectOneMenu>
+			    	</div>
+			    	<div class="col-md-6">
+					    <label for="place">Lugar</label>
+					    <h:selectOneMenu class="form-control" id="place" value="#{talkMB.placeId}" required="true" requiredMessage="Informe o lugar">
+			  				<f:selectItems value="#{talkMB.places}" var="place" itemLabel="#{place.title}" itemValue="#{place.id}"/>
+					    </h:selectOneMenu>
+					</div>
+			    </div>
 			    
-			    <label for="place">Lugar</label>
-			    <h:selectOneMenu class="form-control" id="place" value="#{talkMB.placeId}" required="true" requiredMessage="Informe o lugar">
-	  				<f:selectItems value="#{talkMB.places}" var="place" itemLabel="#{place.title}" itemValue="#{place.id}"/>
-			    </h:selectOneMenu>
+			    <div class="form-group row">
+					<div class="col-md-4">
+					    <label for="startDate">Data Início</label>
+					    <h:inputText styleClass="form-control dateTime" value="#{talkMB.talk.startDate}" required="true" requiredMessage="Informe a data de início">
+					    	<f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>  
+					    </h:inputText>
+					</div>
 			    
-			    <label for="startDate">Data Início</label>
-			    <h:inputText styleClass="form-control dateTime" value="#{talkMB.talk.startDate}" required="true" requiredMessage="Informe a data de início">
-			    	<f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>  
-			    </h:inputText>
+			    	<div class="col-md-4">
+					    <label for="endDate">Data Início</label>
+					    <h:inputText styleClass="form-control dateTime" value="#{talkMB.talk.endDate}" required="true" requiredMessage="Informe a data de fim">
+					    	<f:convertDateTime pattern="dd/MM/yyyy HH:mm"/> 
+					    </h:inputText>
+					</div>
 			    
-			    <label for="endDate">Data Início</label>
-			    <h:inputText styleClass="form-control dateTime" value="#{talkMB.talk.endDate}" required="true" requiredMessage="Informe a data de fim">
-			    	<f:convertDateTime pattern="dd/MM/yyyy HH:mm"/> 
-			    </h:inputText>
+			    	<div class="col-md-4">
+					    <label for="place">Evento</label>
+					    <h:selectOneMenu class="form-control" id="event" value="#{talkMB.eventId}" required="true" requiredMessage="Informe o evento">
+			  				<f:selectItems value="#{talkMB.events}" var="event" itemLabel="#{event.title}" itemValue="#{event.id}"/>
+					    </h:selectOneMenu>
+					</div>
+			    </div>
 			    
 	  			<h:commandButton class="btn btn-primary" action="#{talkMB.create()}" value="Salvar"></h:commandButton>
 	  			<a href="./index.xhtml" title="Listar todos" class="btn btn-default">Cancelar</a>

@@ -6,9 +6,11 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
+import eventstickets.dao.EventDAO;
 import eventstickets.dao.PlaceDAO;
 import eventstickets.dao.TalkDAO;
 import eventstickets.dao.UserDAO;
+import eventstickets.models.Event;
 import eventstickets.models.Place;
 import eventstickets.models.Role;
 import eventstickets.models.Talk;
@@ -23,6 +25,7 @@ public class TalkMB extends AuthenticateUser implements Serializable {
 	private List<User> users;
 	private Integer speakerId;
 	private Integer placeId;
+	private Integer eventId;
 	private Integer id;
 
 	public List<Talk> all(){
@@ -34,6 +37,7 @@ public class TalkMB extends AuthenticateUser implements Serializable {
 		TalkDAO dao = new TalkDAO();
 		talk.setSpeaker(fetchUser());
 		talk.setPlace(fetchPlace());
+		talk.setEvent(fetchEvent());
 		
 		if (dao.create(talk, getCurrentUser())) {
 			return "index";
@@ -45,6 +49,9 @@ public class TalkMB extends AuthenticateUser implements Serializable {
 	public String edit(){
 		TalkDAO dao = new TalkDAO();
 		talk = dao.find(id);
+		speakerId = talk.getSpeaker().getId();
+		eventId = talk.getEvent().getId();
+		placeId = talk.getPlace().getId();
 		return "edit";
 	}
 	
@@ -56,6 +63,8 @@ public class TalkMB extends AuthenticateUser implements Serializable {
 		oldTalk.setSpeaker(fetchUser());
 		oldTalk.setStartDate(talk.getStartDate());
 		oldTalk.setTopic(talk.getTopic());
+		oldTalk.setDescription(talk.getDescription());
+		oldTalk.setEvent(fetchEvent());
 		
 		if (dao.update(oldTalk)) {
 			return "index";
@@ -80,6 +89,12 @@ public class TalkMB extends AuthenticateUser implements Serializable {
 		Place place = new Place();
 		place.setId(placeId);
 		return place;
+	}
+	
+	private Event fetchEvent() {
+		Event event = new Event();
+		event.setId(eventId);
+		return event;
 	}
 
 	public Talk getTalk() {
@@ -131,5 +146,20 @@ public class TalkMB extends AuthenticateUser implements Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
+	public List<Event> getEvents() {
+		EventDAO eventDAO = new EventDAO();
+		return eventDAO.all();
+	}
+	
+	public Integer getEventId() {
+		return eventId;
+	}
+
+	public void setEventId(Integer eventId) {
+		this.eventId = eventId;
+	}
+	
+	
 
 }
