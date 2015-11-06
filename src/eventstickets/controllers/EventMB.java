@@ -63,6 +63,7 @@ public class EventMB extends AuthenticateUser implements Serializable {
 		oldEvent.setPlace(fetchPlace());
 		oldEvent.setStartDate(event.getStartDate());
 		oldEvent.setEndDate(event.getEndDate());
+		oldEvent.setInscriptionsLimit(event.getInscriptionsLimit());
 		
 		if (dao.update(oldEvent)) {
 			MessageHelper.addMensage("Evento atualizado com sucesso", FacesMessage.SEVERITY_INFO);
