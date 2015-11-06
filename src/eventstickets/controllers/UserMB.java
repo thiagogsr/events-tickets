@@ -71,7 +71,7 @@ public class UserMB extends AuthenticateUser implements Serializable{
 		return "index";
 	}
 	
-	public Role[] getRole(){
+	public Role[] getRoles(){
 		return Role.values();
 	}
 	
@@ -85,5 +85,20 @@ public class UserMB extends AuthenticateUser implements Serializable{
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	
+	public String roleFor(String role) {
+		if (role == "ADMIN") {
+			return "Administrador";
+		} else if (role == "MANAGER") {
+			return "Secretário(a)";
+		} else if (role == "EMPLOYEE") {
+			return "Funcionário(a)";
+		} else if (role == "PARTICIPANT") {
+			return "Participante";
+		} else if (role == "SPEAKER") {
+			return "Palestrante";
+		}
+		return "";
 	}
 }
