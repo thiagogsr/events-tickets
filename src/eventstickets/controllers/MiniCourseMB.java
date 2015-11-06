@@ -11,7 +11,7 @@ import eventstickets.models.MiniCourse;
 import eventstickets.models.Place;
 import eventstickets.models.User;
 
-@ManagedBean(name="minicourseMB")
+@ManagedBean(name="miniCourseMB")
 @RequestScoped
 public class MiniCourseMB extends AuthenticateUser implements Serializable {
 	private static final long serialVersionUID = 1L;
