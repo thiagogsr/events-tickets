@@ -1,15 +1,17 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
+
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"> 
+      xmlns:h="http://java.sun.com/jsf/html">
 
 	<ui:composition template="../layout.xhtml">
 		<ui:define name="content">
-			<h2>Editar Evento</h2>
+			<h2>Evento</h2>
 
 			<h:form method="post">
 				<h:inputHidden value="#{eventMB.event.id}" />
+
 				<div class="form-group row">
 					<div class="col-md-6">
 		    			<label for="title">Título</label>
@@ -54,21 +56,27 @@
 			   </div>
 			    
 			    <div class="form-group row">
-					<div class="col-md-6">
+					<div class="col-md-4">
 					    <label for="startDate">Data Início de inscrição</label>
 					    <h:inputText styleClass="form-control dateTime" value="#{eventMB.event.inscriptionsStartDate}" required="true" requiredMessage="Informe a data de início">
 					    	<f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>  
 					    </h:inputText>
 			    	</div>
 			    
-			    	<div class="col-md-6">
+			    	<div class="col-md-4">
 					    <label for="endDate">Data Fim de inscrição</label>
 					    <h:inputText styleClass="form-control dateTime" value="#{eventMB.event.inscriptionsEndDate}" required="true" requiredMessage="Informe a data de fim">
 					    	<f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
 					    </h:inputText> 
 					</div>
+					
+					<div class="col-md-4">
+					    <label>Limite de inscritos</label>
+					    <h:inputText styleClass="form-control" value="#{eventMB.event.inscriptionsLimit}" required="true" requiredMessage="Informe o limite de inscritos"/> 
+					</div>
 			    </div>
-	  			<h:commandButton class="btn btn-primary" action="#{eventMB.update}" value="Atualizar"></h:commandButton>
+			    
+	  			<h:commandButton class="btn btn-primary" action="#{eventMB.save}" value="Salvar"></h:commandButton>
 	  			<a href="./index.xhtml" title="Listar todos" class="btn btn-default">Cancelar</a>
 			</h:form>
 		</ui:define>

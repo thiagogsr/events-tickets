@@ -25,7 +25,15 @@ public class EventMB extends AuthenticateUser implements Serializable {
 		return new EventDAO().all();
 	}
 	
-	public String create() {
+	public String save() {
+		if(event.getId() == null) {
+			return create();
+		} else {
+			return update();
+		}
+	}
+	
+	private String create() {
 		EventDAO dao = new EventDAO();
 		event.setPlace(fetchPlace());
 		
@@ -33,7 +41,7 @@ public class EventMB extends AuthenticateUser implements Serializable {
 			MessageHelper.addMensage("Evento criado com sucesso", FacesMessage.SEVERITY_INFO);
 			return "index";
 		} else {
-			return "new";
+			return "form";
 		}
 	}
 	
@@ -41,10 +49,10 @@ public class EventMB extends AuthenticateUser implements Serializable {
 		EventDAO dao = new EventDAO();
 		event = dao.find(id);
 		placeId = event.getPlace().getId();
-		return "edit";
+		return "form";
 	}
 	
-	public String update() {
+	private String update() {
 		EventDAO dao = new EventDAO();
 		Event oldEvent = dao.find(event.getId());
 		oldEvent.setTitle(event.getTitle());
@@ -60,7 +68,7 @@ public class EventMB extends AuthenticateUser implements Serializable {
 			MessageHelper.addMensage("Evento atualizado com sucesso", FacesMessage.SEVERITY_INFO);
 			return "index";
 		} else {
-			return "edit";
+			return "form";
 		}
 	}
 	
