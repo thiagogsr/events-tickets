@@ -12,6 +12,6 @@ public class SuccessServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect("dashboard/index.jsp");
+		response.sendRedirect("dashboard/index.xhtml");
 	}
 }
