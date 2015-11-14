@@ -17,7 +17,7 @@ public class MiniCourse {
 	private Date Date;
 	private Place place;
 	private String objective;
-	private String quantity;
+	private int quantity;
 	private String value;
 	private Date createdAt;
 	private Date updatedAt;
@@ -95,11 +95,11 @@ public class MiniCourse {
 		this.objective = objective;
 	}
 	
-	public String getQuantity() {
+	public int getQuantity() {
 		return quantity;
 	}
 	
-	public void setQuantity(String quantity) {
+	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
 	
