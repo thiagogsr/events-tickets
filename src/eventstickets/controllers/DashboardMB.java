@@ -6,7 +6,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
-import eventstickets.dao.EventInscriptionsDAO;
+import eventstickets.dao.EventInscriptionDAO;
 import eventstickets.models.Event;
 
 @ManagedBean(name = "DashboardMB")
@@ -15,7 +15,7 @@ public class DashboardMB extends AuthenticateUser implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	public List<Event> getEvents() {
-		EventInscriptionsDAO dao = new EventInscriptionsDAO();
+		EventInscriptionDAO dao = new EventInscriptionDAO();
 		return dao.getEventsRegisteredByUserId(getCurrentUser().getId());
 	}
 }

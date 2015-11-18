@@ -1,5 +1,6 @@
 package eventstickets.controllers;
 
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -8,46 +9,50 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
 import eventstickets.dao.EventDAO;
-import eventstickets.dao.EventInscriptionsDAO;
+import eventstickets.dao.EventInscriptionDAO;
 import eventstickets.helpers.MessageHelper;
 import eventstickets.models.Event;
-import eventstickets.models.EventInscriptions;
+import eventstickets.models.EventInscription;
 
-@ManagedBean(name = "eventInscriptionsMB")
+@ManagedBean(name = "eventInscriptionMB")
 @RequestScoped
-public class EventInscriptionsMB extends AuthenticateUser implements Serializable{
+public class EventInscriptionMB extends AuthenticateUser implements Serializable{
 	private static final long serialVersionUID = 1L;
-	private EventInscriptions eventInscriptions = new EventInscriptions();
+	private EventInscription eventInscription = new EventInscription();
 	private Integer eventId;
 	
 	public void create(){
-		EventInscriptionsDAO dao = new EventInscriptionsDAO();
+		EventInscriptionDAO dao = new EventInscriptionDAO();
 		Event event = getEvent();
 		if(dao.totalSubscribersEvent(event.getId()) < event.getInscriptionsLimit()){
-			eventInscriptions.setUser(getCurrentUser());
-			eventInscriptions.setEvent(event);
-			dao.create(eventInscriptions);
+			eventInscription.setUser(getCurrentUser());
+			eventInscription.setEvent(event);
+			dao.create(eventInscription);
 			MessageHelper.addMensage("Inscrição no evento " + event.getTitle() + " realizada com sucesso.", FacesMessage.SEVERITY_INFO);
 		} else {
 			MessageHelper.addMensage("Não há mais vagas no evento " + event.getTitle() + ".", FacesMessage.SEVERITY_ERROR);
 		}
 	}
 	
-	public List<Event> getEvents() {
-		EventInscriptionsDAO dao = new EventInscriptionsDAO();
+	public List<Event> getEventsByUser() {
+		EventInscriptionDAO dao = new EventInscriptionDAO();
 		return dao.getEventByUserId(getCurrentUser().getId());
+	}
+	
+	public List<Event> getEvents() {
+		return new EventDAO().all();
 	}
 	
 	private Event getEvent(){
 		return new EventDAO().find(eventId);
 	}
 	
-	public EventInscriptions getEventInscriptions() {
-		return eventInscriptions;
+	public EventInscription getEventInscription() {
+		return eventInscription;
 	}
 	
-	public void setEventInscriptions(EventInscriptions eventInscriptions) {
-		this.eventInscriptions = eventInscriptions;
+	public void setEventInscription(EventInscription eventInscription) {
+		this.eventInscription = eventInscription;
 	}
 	
 	public Integer getEventId() {

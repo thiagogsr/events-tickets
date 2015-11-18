@@ -13,7 +13,7 @@
 				<h:form>
 					<h:messages errorClass="alert alert-danger" infoClass="alert alert-success" styleClass="messages" />
 
-					<h:dataTable value="#{eventInscriptionsMB.events}" var="u"
+					<h:dataTable value="#{eventInscriptionMB.eventsByUser}" var="u"
 						styleClass="table">
 						<h:column>
 							<f:facet name="header">Título</f:facet>
@@ -40,9 +40,9 @@
 					    		#{u.price}
 					</h:column>
 						<h:column>
-							<h:commandLink action="#{eventInscriptionsMB.create}" value="Inscreva-se">
-								<f:setPropertyActionListener target="#{eventInscriptionsMB.eventId}" value="#{u.id}" />
-								<f:setPropertyActionListener target="#{eventInscriptionsMB.eventInscriptions.price}" value="#{u.price}" />
+							<h:commandLink action="#{eventInscriptionMB.create}" value="Inscreva-se">
+								<f:setPropertyActionListener target="#{eventInscriptionMB.eventId}" value="#{u.id}" />
+								<f:setPropertyActionListener target="#{eventInscriptionMB.eventInscription.price}" value="#{u.price}" />
 							</h:commandLink>
 						</h:column>
 					</h:dataTable>
