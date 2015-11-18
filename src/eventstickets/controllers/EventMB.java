@@ -1,13 +1,25 @@
 package eventstickets.controllers;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletResponse;
 
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import eventstickets.dao.EventDAO;
+import eventstickets.dao.EventInscriptionDAO;
 import eventstickets.dao.PlaceDAO;
 import eventstickets.helpers.MessageHelper;
 import eventstickets.models.Event;
@@ -78,6 +90,22 @@ public class EventMB extends AuthenticateUser implements Serializable {
 		dao.destroy(id);
 		MessageHelper.addMensage("Evento removido com sucesso", FacesMessage.SEVERITY_INFO);
 		return "index";
+	}
+	
+	public void gerarRelatorio() throws JRException, IOException{
+		EventInscriptionDAO dao = new EventInscriptionDAO();
+		List dataSource = dao.getEventsInscriptions(id);
+		JasperPrint printReport = JasperFillManager.fillReport(getReportInputStream(), new HashMap(), new JRBeanCollectionDataSource(dataSource, false));
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		HttpServletResponse httpServletResponse =  (HttpServletResponse) facesContext.getExternalContext().getResponse();
+		httpServletResponse.addHeader("Content-disposition", "attachment; filename=inscritos.pdf");  
+		OutputStream outputStream = httpServletResponse.getOutputStream();
+		JasperExportManager.exportReportToPdfStream(printReport, outputStream);
+		facesContext.responseComplete();
+	}
+	
+	private InputStream getReportInputStream(){
+		return this.getClass().getResourceAsStream("../report/inscriptionsByEvent.jasper");
 	}
 	
 	private Place fetchPlace() {
