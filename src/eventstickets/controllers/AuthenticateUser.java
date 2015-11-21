@@ -2,15 +2,17 @@ package eventstickets.controllers;
 
 import java.io.IOException;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
+import eventstickets.helpers.MessageHelper;
 import eventstickets.models.User;
 
 public class AuthenticateUser {
 	private User currentUser;
 	
-	public AuthenticateUser() {
+	protected AuthenticateUser() {
 		if (getSession().getAttribute("currentUser") == null) {
 		    try {
 		    	String uri = "../login.jsp";
@@ -23,8 +25,18 @@ public class AuthenticateUser {
 		currentUser = (User) getSession().getAttribute("currentUser");
 	}
 	
-	public User getCurrentUser() {
+	protected User getCurrentUser() {
 		return currentUser;
+	}
+	
+	protected void checkPermission(boolean allowed) {
+		if (!allowed) {
+			try {
+				FacesContext.getCurrentInstance().getExternalContext().redirect("../dashboard/index.xhtml");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	private HttpSession getSession() {

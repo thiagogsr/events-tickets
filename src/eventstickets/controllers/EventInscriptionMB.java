@@ -13,6 +13,7 @@ import eventstickets.dao.EventInscriptionDAO;
 import eventstickets.helpers.MessageHelper;
 import eventstickets.models.Event;
 import eventstickets.models.EventInscription;
+import eventstickets.policies.EventPolicy;
 
 @ManagedBean(name = "eventInscriptionMB")
 @RequestScoped
@@ -20,6 +21,10 @@ public class EventInscriptionMB extends AuthenticateUser implements Serializable
 	private static final long serialVersionUID = 1L;
 	private EventInscription eventInscription = new EventInscription();
 	private Integer eventId;
+	
+	public EventInscriptionMB() {
+		checkPermission(EventPolicy.register(getCurrentUser()));
+	}
 	
 	public void create(){
 		EventInscriptionDAO dao = new EventInscriptionDAO();

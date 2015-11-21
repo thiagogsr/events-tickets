@@ -13,17 +13,18 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletResponse;
 
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import eventstickets.dao.EventDAO;
 import eventstickets.dao.EventInscriptionDAO;
 import eventstickets.dao.PlaceDAO;
 import eventstickets.helpers.MessageHelper;
 import eventstickets.models.Event;
 import eventstickets.models.Place;
+import eventstickets.policies.EventPolicy;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 @ManagedBean(name="eventMB")
 @RequestScoped
@@ -34,10 +35,14 @@ public class EventMB extends AuthenticateUser implements Serializable {
 	private Integer id;
 
 	public List<Event> getAll() {
+		checkPermission(EventPolicy.index(getCurrentUser()));
+		
 		return new EventDAO().all();
 	}
 	
 	public String save() {
+		checkPermission(EventPolicy.index(getCurrentUser()));
+		
 		if(event.getId() == null) {
 			return create();
 		} else {
@@ -46,6 +51,8 @@ public class EventMB extends AuthenticateUser implements Serializable {
 	}
 	
 	private String create() {
+		checkPermission(EventPolicy.index(getCurrentUser()));
+		
 		EventDAO dao = new EventDAO();
 		event.setPlace(fetchPlace());
 		
@@ -58,6 +65,8 @@ public class EventMB extends AuthenticateUser implements Serializable {
 	}
 	
 	public String edit() {
+		checkPermission(EventPolicy.index(getCurrentUser()));
+		
 		EventDAO dao = new EventDAO();
 		event = dao.find(id);
 		placeId = event.getPlace().getId();
@@ -65,6 +74,8 @@ public class EventMB extends AuthenticateUser implements Serializable {
 	}
 	
 	private String update() {
+		checkPermission(EventPolicy.index(getCurrentUser()));
+		
 		EventDAO dao = new EventDAO();
 		Event oldEvent = dao.find(event.getId());
 		oldEvent.setTitle(event.getTitle());
@@ -86,6 +97,8 @@ public class EventMB extends AuthenticateUser implements Serializable {
 	}
 	
 	public String destroy() {
+		checkPermission(EventPolicy.index(getCurrentUser()));
+		
 		EventDAO dao = new EventDAO();
 		dao.destroy(id);
 		MessageHelper.addMensage("Evento removido com sucesso", FacesMessage.SEVERITY_INFO);
@@ -93,6 +106,8 @@ public class EventMB extends AuthenticateUser implements Serializable {
 	}
 	
 	public void gerarRelatorio() throws JRException, IOException{
+		checkPermission(EventPolicy.report(getCurrentUser()));
+		
 		EventInscriptionDAO dao = new EventInscriptionDAO();
 		List dataSource = dao.getEventsInscriptions(id);
 		JasperPrint printReport = JasperFillManager.fillReport(getReportInputStream(), new HashMap(), new JRBeanCollectionDataSource(dataSource, false));

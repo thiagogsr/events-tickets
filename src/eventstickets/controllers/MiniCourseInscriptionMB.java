@@ -12,6 +12,7 @@ import eventstickets.dao.MiniCourseInscriptionDAO;
 import eventstickets.helpers.MessageHelper;
 import eventstickets.models.MiniCourse;
 import eventstickets.models.MiniCourseInscription;
+import eventstickets.policies.EventPolicy;
 
 
 @ManagedBean(name = "miniCourseInscriptionMB")
@@ -20,6 +21,10 @@ public class MiniCourseInscriptionMB  extends AuthenticateUser implements Serial
 	private static final long serialVersionUID = 1L;
 	private MiniCourseInscription miniCourseInscription = new MiniCourseInscription();
 	private Integer miniCourseId;
+	
+	public MiniCourseInscriptionMB() {
+		checkPermission(EventPolicy.register(getCurrentUser()));
+	}
 			
 	public List<MiniCourseInscription> getAll(){
 		MiniCourseInscriptionDAO dao = new MiniCourseInscriptionDAO();
@@ -42,18 +47,23 @@ public class MiniCourseInscriptionMB  extends AuthenticateUser implements Serial
 		MiniCourseInscriptionDAO dao = new MiniCourseInscriptionDAO();
 		return dao.getMiniCourseByUserId(getCurrentUser().getId());
 	}
+	
 	private MiniCourse getMiniCourse(){
 		return new MiniCourseDAO().find(miniCourseId);
 	}
+	
 	public MiniCourseInscription getMiniCourseInscription() {
 		return miniCourseInscription;
 	}
+	
 	public void setMiniCourseInscription(MiniCourseInscription miniCourseInscription) {
 		this.miniCourseInscription = miniCourseInscription;
 	}
+	
 	public Integer getMiniCourseId() {
 		return miniCourseId;
 	}
+	
 	public void setMiniCourseId(Integer miniCourseId) {
 		this.miniCourseId = miniCourseId;
 	}	

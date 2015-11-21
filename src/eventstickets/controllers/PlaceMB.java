@@ -10,6 +10,7 @@ import javax.faces.bean.RequestScoped;
 import eventstickets.dao.PlaceDAO;
 import eventstickets.helpers.MessageHelper;
 import eventstickets.models.Place;
+import eventstickets.policies.PlacePolicy;
 
 @ManagedBean(name="placeMB")
 @RequestScoped
@@ -17,6 +18,10 @@ public class PlaceMB extends AuthenticateUser implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Place place = new Place();
 	private Integer id;
+	
+	public PlaceMB() {
+		checkPermission(PlacePolicy.index(getCurrentUser()));
+	}
 
 	public List<Place> getAll() {
 		return new PlaceDAO().all();

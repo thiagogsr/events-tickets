@@ -15,18 +15,21 @@ import eventstickets.models.Place;
 import eventstickets.models.Role;
 import eventstickets.models.Talk;
 import eventstickets.models.User;
+import eventstickets.policies.TalkPolicy;
 
 @ManagedBean(name = "talkMB")
 @RequestScoped
 public class TalkMB extends AuthenticateUser implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Talk talk = new Talk();
-	private List<Place> places;
-	private List<User> users;
 	private Integer speakerId;
 	private Integer placeId;
 	private Integer eventId;
 	private Integer id;
+	
+	public TalkMB() {
+		checkPermission(TalkPolicy.index(getCurrentUser()));
+	}
 
 	public List<Talk> getAll(){
 		TalkDAO dao = new TalkDAO();
@@ -134,17 +137,9 @@ public class TalkMB extends AuthenticateUser implements Serializable {
 		return placeDAO.all();
 	}
 
-	public void setPlaces(List<Place> places) {
-		this.places = places;
-	}
-
 	public List<User> getUsers() {
 		UserDAO userDAO = new UserDAO();
 		return userDAO.byRole(Role.SPEAKER);
-	}
-
-	public void setUsers(List<User> users) {
-		this.users = users;
 	}
 
 	public Integer getId() {

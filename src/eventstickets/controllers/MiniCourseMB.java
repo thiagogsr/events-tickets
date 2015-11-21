@@ -10,6 +10,7 @@ import eventstickets.dao.MiniCourseDAO;
 import eventstickets.models.MiniCourse;
 import eventstickets.models.Place;
 import eventstickets.models.User;
+import eventstickets.policies.MiniCoursePolicy;
 
 @ManagedBean(name="miniCourseMB")
 @RequestScoped
@@ -21,6 +22,10 @@ public class MiniCourseMB extends AuthenticateUser implements Serializable {
 	private List<User> users;
 	private Integer speakerId;
 	private Integer placeId;
+	
+	public MiniCourseMB() {
+		checkPermission(MiniCoursePolicy.index(getCurrentUser()));
+	}
 
 	public List<MiniCourse> all() {
 		return new MiniCourseDAO().all();

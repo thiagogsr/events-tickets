@@ -6,11 +6,10 @@ import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
 
-
-
 import eventstickets.dao.UserDAO;
 import eventstickets.models.Role;
 import eventstickets.models.User;
+import eventstickets.policies.UserPolicy;
 
 @ManagedBean(name="userMB")
 @RequestScoped
@@ -18,6 +17,10 @@ public class UserMB extends AuthenticateUser implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private User user = new User();
 	private Integer id;
+	
+	public UserMB() {
+		checkPermission(UserPolicy.index(getCurrentUser()));
+	}
 
 	public List<User> getAll() {
 		return new UserDAO().all();
