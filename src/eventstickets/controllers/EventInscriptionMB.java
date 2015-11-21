@@ -36,7 +36,7 @@ public class EventInscriptionMB extends AuthenticateUser implements Serializable
 	
 	public List<Event> getEventsByUser() {
 		EventInscriptionDAO dao = new EventInscriptionDAO();
-		return dao.getEventByUserId(getCurrentUser().getId());
+		return dao.getNotRegisteredEvents(getCurrentUser().getId());
 	}
 	
 	public List<Event> getEvents() {

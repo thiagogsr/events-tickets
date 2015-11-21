@@ -26,7 +26,7 @@ public class EventInscriptionDAO extends MainDAO{
 		}
 	}
 	
-	public Long totalSubscribersEvent (Integer eventId){
+	public Long totalSubscribersEvent(Integer eventId){
 		EntityManager manager = openSession();
 		Query eventInscriptionsQuery = manager.createQuery("select count(*)" +
 														   " from eventstickets.models.EventInscription eventInscription" +
@@ -36,7 +36,7 @@ public class EventInscriptionDAO extends MainDAO{
 		return count;
 	}
 	
-	public List<Event> getEventsRegisteredByUserId(Integer userId){
+	public List<Event> getRegisteredEvents(Integer userId){
 		EntityManager manager = openSession();
 		Query eventsQuery = manager.createQuery("select event from eventstickets.models.EventInscription eventInscription" +
 												" join eventInscription.event event" +
@@ -46,24 +46,15 @@ public class EventInscriptionDAO extends MainDAO{
 		return events;
 	}
 	
-	public List<Event> getEventsInscriptionsByEventId(Integer eventId){
-		EntityManager manager = openSession();
-		Query eventsQuery = manager.createQuery("select eventInscriptions" +
-												" from eventstickets.models.EventInscription eventInscription" +
-												" join eventInscription.event event" +
-												" join eventInscription.user user" +
-												" where eventInscription.event.id in (:eventId)");
-		eventsQuery.setParameter("eventId", eventId);
-		List<Event> events = eventsQuery.getResultList();
-		return events;
-	}
-	
-	public List<Event> getEventByUserId(Integer userId){
+	public List<Event> getNotRegisteredEvents(Integer userId){
 		EntityManager manager = openSession();
 		Query eventsQuery = manager.createQuery("from eventstickets.models.Event event" + 
-												" where not exists (from eventstickets.models.EventInscription eventInscription" +
+												" where event.inscriptionsStartDate <= :today" +
+												" and event.inscriptionsEndDate >= :today" +
+												" and not exists (from eventstickets.models.EventInscription eventInscription" +
 												" where eventInscription.user.id in (:userId)" + 
 												" and eventInscription.event.id = event.id)");
+		eventsQuery.setParameter("today", new Date());
 		eventsQuery.setParameter("userId", userId);
 		List<Event> events = eventsQuery.getResultList();
 		return events;

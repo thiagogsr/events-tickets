@@ -16,6 +16,6 @@ public class DashboardMB extends AuthenticateUser implements Serializable{
 	
 	public List<Event> getEvents() {
 		EventInscriptionDAO dao = new EventInscriptionDAO();
-		return dao.getEventsRegisteredByUserId(getCurrentUser().getId());
+		return dao.getRegisteredEvents(getCurrentUser().getId());
 	}
 }
