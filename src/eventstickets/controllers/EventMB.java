@@ -69,8 +69,8 @@ public class EventMB extends AuthenticateUser implements Serializable {
 		Event oldEvent = dao.find(event.getId());
 		oldEvent.setTitle(event.getTitle());
 		oldEvent.setDescription(event.getDescription());
+		oldEvent.setInscriptionsStartDate(event.getInscriptionsStartDate());
 		oldEvent.setInscriptionsEndDate(event.getInscriptionsEndDate());
-		oldEvent.setInscriptionsStartDate(event.getStartDate());
 		oldEvent.setPrice(event.getPrice());
 		oldEvent.setPlace(fetchPlace());
 		oldEvent.setStartDate(event.getStartDate());
