@@ -29,31 +29,31 @@
 					    		#{u.price}
 					</h:column>
 					<h:column>
-							<f:facet name="header">Data de início</f:facet>
+							<f:facet name="header">De</f:facet>
 					    		<h:outputText value="#{u.startDate}">
 									<f:convertDateTime pattern="dd/MM/yyyy" />
 								</h:outputText>
 					</h:column>
 						<h:column>
-							<f:facet name="header">Data de término</f:facet>
+							<f:facet name="header">Até</f:facet>
 					    		<h:outputText value="#{u.endDate}">
 									<f:convertDateTime pattern="dd/MM/yyyy" />
 								</h:outputText>
 					</h:column>
 					<h:column>
-							<f:facet name="header">Data de início das inscrições</f:facet>
+							<f:facet name="header">Inscrições de</f:facet>
 							<h:outputText value="#{u.inscriptionsStartDate}">
 								<f:convertDateTime pattern="dd/MM/yyyy" />
 							</h:outputText>
 					</h:column>
 					<h:column>
-							<f:facet name="header">Data de término das inscrições</f:facet>
+							<f:facet name="header">até</f:facet>
 					    		<h:outputText value="#{u.inscriptionsEndDate}">
 									<f:convertDateTime pattern="dd/MM/yyyy" />
 								</h:outputText>
 					</h:column>
 					<h:column>
-							<f:facet name="header">Limite de inscrições</f:facet>
+							<f:facet name="header">Lotação</f:facet>
 					    		#{u.inscriptionsLimit}
 					</h:column>
 						<h:column>
