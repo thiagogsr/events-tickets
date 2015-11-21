@@ -9,7 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity(name="miniCourse_inscription")
-	public class MiniCourseInscriptions {
+	public class MiniCourseInscription {
 			private Integer id;
 			private User participant;
 			private String price;

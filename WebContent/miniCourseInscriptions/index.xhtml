@@ -12,7 +12,7 @@
 					<h2>Inscrição do Mini Curso</h2>
 					<h:form>
 					<h:messages errorClass="alert alert-danger" infoClass="alert alert-success" styleClass="messages" />
-						<h:dataTable value="#{miniCourseInscriptionsMB.mini}" var="i" styleClass="table">
+						<h:dataTable value="#{miniCourseInscriptionMB.mini}" var="i" styleClass="table">
 							<h:column>
 								<f:facet name="header">Mini Curso</f:facet>
 					    		#{i.title}
@@ -36,11 +36,11 @@
 								 </h:outputText>
 						</h:column>
 						<h:column>
-							<h:commandLink action="#{miniCourseInscriptionsMB.create}" value="Inscreva-se">
-								<f:setPropertyActionListener target="#{miniCourseInscriptionsMB.miniCourseId}" value="#{i.id}" />
-								<f:setPropertyActionListener target="#{miniCourseInscriptionsMB.miniCourseInscription.price}" value="#{i.value}" />
+							<h:commandLink action="#{miniCourseInscriptionMB.create}" value="Inscreva-se">
+								<f:setPropertyActionListener target="#{miniCourseInscriptionMB.miniCourseId}" value="#{i.id}" />
+								<f:setPropertyActionListener target="#{miniCourseInscriptionMB.miniCourseInscription.price}" value="#{i.value}" />
 							</h:commandLink>
-						</h:column>	
+						</h:column>
 				</h:dataTable>
 			</h:form>
 				</div>

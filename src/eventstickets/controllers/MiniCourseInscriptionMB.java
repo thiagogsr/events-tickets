@@ -6,48 +6,49 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+
 import eventstickets.dao.MiniCourseDAO;
-import eventstickets.dao.MiniCourseInscriptionsDAO;
+import eventstickets.dao.MiniCourseInscriptionDAO;
 import eventstickets.helpers.MessageHelper;
 import eventstickets.models.MiniCourse;
-import eventstickets.models.MiniCourseInscriptions;
+import eventstickets.models.MiniCourseInscription;
 
 
-@ManagedBean(name = "miniCourseInscriptionsMB")
+@ManagedBean(name = "miniCourseInscriptionMB")
 @RequestScoped
-public class MiniCourseInscriptionsMB  extends AuthenticateUser implements Serializable{
+public class MiniCourseInscriptionMB  extends AuthenticateUser implements Serializable{
 	private static final long serialVersionUID = 1L;
-	private MiniCourseInscriptions miniCourseInscription = new MiniCourseInscriptions();
+	private MiniCourseInscription miniCourseInscription = new MiniCourseInscription();
 	private Integer miniCourseId;
 			
-	public List<MiniCourseInscriptions> getAll(){
-		MiniCourseInscriptionsDAO dao = new MiniCourseInscriptionsDAO();
+	public List<MiniCourseInscription> getAll(){
+		MiniCourseInscriptionDAO dao = new MiniCourseInscriptionDAO();
 		return dao.all();
 	}
 	public void create(){
-		MiniCourseInscriptionsDAO dao = new MiniCourseInscriptionsDAO();
+		MiniCourseInscriptionDAO dao = new MiniCourseInscriptionDAO();
 		MiniCourse miniCourse = (MiniCourse) getMiniCourse();
 		if(dao.totalInsriptionMiniCourse(miniCourse.getId()) < miniCourse.getQuantity()){
 			miniCourseInscription.setParticipant(getCurrentUser());
 			miniCourseInscription.setMini(miniCourse);
 			dao.create(miniCourseInscription);
-			MessageHelper.addMensage("Inscrição no Mini Curso " + miniCourse.getTitle() + " realizada com sucesso.", FacesMessage.SEVERITY_INFO);
+			MessageHelper.addMensage("InscriÃ§Ã£o no Mini Curso " + miniCourse.getTitle() + " realizada com sucesso.", FacesMessage.SEVERITY_INFO);
 		} else {
-			MessageHelper.addMensage("Nãoo há mais vagas para o Mini Curso " + miniCourse.getTitle() + ".", FacesMessage.SEVERITY_ERROR);
+			MessageHelper.addMensage("NÃ£oo hÃ¡ mais vagas para o Mini Curso " + miniCourse.getTitle() + ".", FacesMessage.SEVERITY_ERROR);
 		}
 	}
 	
 	public List<MiniCourse> getMini() {
-		MiniCourseInscriptionsDAO dao = new MiniCourseInscriptionsDAO();
+		MiniCourseInscriptionDAO dao = new MiniCourseInscriptionDAO();
 		return dao.getMiniCourseByUserId(getCurrentUser().getId());
 	}
 	private MiniCourse getMiniCourse(){
 		return new MiniCourseDAO().find(miniCourseId);
 	}
-	public MiniCourseInscriptions getMiniCourseInscription() {
+	public MiniCourseInscription getMiniCourseInscription() {
 		return miniCourseInscription;
 	}
-	public void setMiniCourseInscription(MiniCourseInscriptions miniCourseInscription) {
+	public void setMiniCourseInscription(MiniCourseInscription miniCourseInscription) {
 		this.miniCourseInscription = miniCourseInscription;
 	}
 	public Integer getMiniCourseId() {
