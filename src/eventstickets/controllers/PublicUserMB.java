@@ -2,8 +2,8 @@ package eventstickets.controllers;
 
 import java.io.Serializable;
 
-
-import javax.faces.bean.*;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 
 import eventstickets.dao.UserDAO;
 import eventstickets.models.User;
