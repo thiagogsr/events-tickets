@@ -2,11 +2,9 @@ package eventstickets.controllers;
 
 import java.io.IOException;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
-import eventstickets.helpers.MessageHelper;
 import eventstickets.models.User;
 
 public class AuthenticateUser {
@@ -15,8 +13,7 @@ public class AuthenticateUser {
 	protected AuthenticateUser() {
 		if (getSession().getAttribute("currentUser") == null) {
 		    try {
-		    	String uri = "../login.jsp";
-				FacesContext.getCurrentInstance().getExternalContext().redirect(uri);
+				redirect("../login.jsp");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -32,14 +29,18 @@ public class AuthenticateUser {
 	protected void checkPermission(boolean allowed) {
 		if (!allowed) {
 			try {
-				FacesContext.getCurrentInstance().getExternalContext().redirect("../dashboard/index.xhtml?denied=true");
+				redirect("../dashboard/index.xhtml?denied=true");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
 	}
 	
-	private HttpSession getSession() {
+	protected void redirect(String path) throws IOException {
+		FacesContext.getCurrentInstance().getExternalContext().redirect(path);
+	}
+	
+	protected HttpSession getSession() {
        return (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
    }
 }
