@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
-<!-- 2015-11-21T17:49:24 -->
+<!-- 2015-11-22T08:34:26 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="inscriptionsByEvent" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5a38346d-15cf-470c-bc9b-4a5d1c8487a7">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<queryString>
@@ -11,6 +11,9 @@
 	</field>
 	<field name="email" class="java.lang.String">
 		<fieldDescription><![CDATA[email]]></fieldDescription>
+	</field>
+	<field name="date" class="java.util.Date">
+		<fieldDescription><![CDATA[createdAt]]></fieldDescription>
 	</field>
 	<background>
 		<band/>
@@ -38,7 +41,7 @@
 				<reportElement x="0" y="20" width="555" height="1" forecolor="#666666" uuid="eaf4faf9-fc00-40fe-9124-e3c7e9ab98e5"/>
 			</line>
 			<staticText>
-				<reportElement mode="Opaque" x="0" y="0" width="277" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="0b7a6dde-5a3e-46ab-a3a3-476c48d7a233">
+				<reportElement mode="Opaque" x="0" y="0" width="185" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="0b7a6dde-5a3e-46ab-a3a3-476c48d7a233">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
 				<textElement textAlignment="Center">
@@ -47,7 +50,7 @@
 				<text><![CDATA[Nome]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="278" y="0" width="277" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="0b7a6dde-5a3e-46ab-a3a3-476c48d7a233">
+				<reportElement mode="Opaque" x="186" y="0" width="185" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="0b7a6dde-5a3e-46ab-a3a3-476c48d7a233">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
 				<textElement textAlignment="Center">
@@ -55,12 +58,21 @@
 				</textElement>
 				<text><![CDATA[E-mail]]></text>
 			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="372" y="0" width="185" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="0b7a6dde-5a3e-46ab-a3a3-476c48d7a233">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data da Inscrição]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="21">
 			<textField isStretchWithOverflow="true">
-				<reportElement x="0" y="0" width="277" height="20" uuid="e3a78508-3e4a-44ac-85ca-52e6ecc475c6">
+				<reportElement x="0" y="0" width="185" height="20" uuid="e3a78508-3e4a-44ac-85ca-52e6ecc475c6">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
 				<textElement>
@@ -69,13 +81,22 @@
 				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="278" y="0" width="277" height="20" uuid="e3a78508-3e4a-44ac-85ca-52e6ecc475c6">
+				<reportElement x="186" y="0" width="185" height="20" uuid="e3a78508-3e4a-44ac-85ca-52e6ecc475c6">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
 				<textElement>
 					<font size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="372" y="0" width="185" height="20" uuid="e3a78508-3e4a-44ac-85ca-52e6ecc475c6">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
