@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -21,13 +22,11 @@
 	        		<div class="container-fluid">
 	        			<ul class="nav navbar-nav">
 	        				<li><a href="../dashboard/index.xhtml">Events Calendar</a></li>
-	        				<li><a href="../eventsInscriptions/index.xhtml">Inscreva-se</a></li>
-	        				<li><a href="../events/index.xhtml">Eventos</a></li>
-	        				<li><a href="../talks/index.xhtml">Palestras</a></li>
-	        				<li><a href="../miniCourses/index.xhtml">Mini Cursos</a></li>
-	        				<li><a href="../places/index.xhtml">Lugares</a></li>
-	        				<li><a href="../users/index.xhtml">Usuários</a></li>
+	        				<c:forEach items="#{navBarMB.navItems}" var="item">
+								<li><h:outputLink value="#{item.key}">#{item.value}</h:outputLink></li>
+							</c:forEach>
 	        			</ul>
+
 	       				<ul class="nav navbar-nav navbar-right">
 	       					<li><a href="#">Olá #{currentUser.name}</a></li>
 	       					
