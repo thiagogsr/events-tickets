@@ -3,47 +3,50 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <ui:composition template="../layout.xhtml">
 	<ui:define name="content">
 		<div class="row">
 			<div class="col-md-12">
-				<h2>Inscrições</h2>
-				
-				<h:form>
-					<h:messages errorClass="alert alert-danger" infoClass="alert alert-success" styleClass="messages" />
+				<c:if test="#{dashboardMB.allowed}">
+					<h2>Inscrições</h2>
 					
-					<h:dataTable value="#{dashboardMB.events}" var="u" styleClass="table">
-						<h:column>
-							<f:facet name="header">Título</f:facet>
-					    		#{u.title}
-						</h:column>
-						<h:column>
-								<f:facet name="header">Local</f:facet>
-						    		#{u.place.title}
-						</h:column>
-						<h:column>
-								<f:facet name="header">Início</f:facet>
-						    		<h:outputText value="#{u.startDate}">
-										<f:convertDateTime pattern="dd/MM/yyyy" />
-									</h:outputText>
-						</h:column>
+					<h:form>
+						<h:messages errorClass="alert alert-danger" infoClass="alert alert-success" styleClass="messages" />
+						
+						<h:dataTable value="#{dashboardMB.events}" var="u" styleClass="table">
 							<h:column>
-								<f:facet name="header">Término</f:facet>
-						    		<h:outputText value="#{u.endDate}">
-										<f:convertDateTime pattern="dd/MM/yyyy" />
-									</h:outputText>
-						</h:column>
-						<h:column>
-								<f:facet name="header">Preço</f:facet>
-						    		#{u.price}
-						</h:column>
-						<h:column>
-							<h:outputLink value="../miniCourseInscriptions/index.xhtml?eventId=#{u.id}">Mini Cursos</h:outputLink>
-						</h:column>
-					</h:dataTable>
-				</h:form>
+								<f:facet name="header">Título</f:facet>
+						    		#{u.title}
+							</h:column>
+							<h:column>
+									<f:facet name="header">Local</f:facet>
+							    		#{u.place.title}
+							</h:column>
+							<h:column>
+									<f:facet name="header">Início</f:facet>
+							    		<h:outputText value="#{u.startDate}">
+											<f:convertDateTime pattern="dd/MM/yyyy" />
+										</h:outputText>
+							</h:column>
+								<h:column>
+									<f:facet name="header">Término</f:facet>
+							    		<h:outputText value="#{u.endDate}">
+											<f:convertDateTime pattern="dd/MM/yyyy" />
+										</h:outputText>
+							</h:column>
+							<h:column>
+									<f:facet name="header">Preço</f:facet>
+							    		#{u.price}
+							</h:column>
+							<h:column>
+								<h:outputLink value="../miniCourseInscriptions/index.xhtml?eventId=#{u.id}">Mini Cursos</h:outputLink>
+							</h:column>
+						</h:dataTable>
+					</h:form>
+				</c:if>
 			</div>
 		</div>
 	</ui:define>
