@@ -24,7 +24,6 @@ public class Event {
 	private Date createdAt;
 	private Date updatedAt;
 	
-	
 	public float getPrice() {
 		return price;
 	}
