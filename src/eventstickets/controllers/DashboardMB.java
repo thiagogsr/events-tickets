@@ -29,8 +29,4 @@ public class DashboardMB extends AuthenticateUser implements Serializable{
 		EventInscriptionDAO dao = new EventInscriptionDAO();
 		return dao.getRegisteredEvents(getCurrentUser().getId());
 	}
-	
-	private Map<String, String> params() {
-		return FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-	}
 }

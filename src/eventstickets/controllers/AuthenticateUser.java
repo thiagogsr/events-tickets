@@ -1,6 +1,7 @@
 package eventstickets.controllers;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
@@ -20,6 +21,10 @@ public class AuthenticateUser {
 		}
 		
 		currentUser = (User) getSession().getAttribute("currentUser");
+	}
+	
+	protected Map<String, String> params() {
+		return FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
 	}
 	
 	protected User getCurrentUser() {
