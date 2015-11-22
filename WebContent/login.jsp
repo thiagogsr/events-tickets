@@ -14,7 +14,9 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-4 col-sm-offset-4">
-				<h1>Entrar</h1>
+				<div class="text-center"><img src="vendor/image/logo.png" /></div>
+
+				<h1 class="text-center">Entrar</h1>
 				<%
 					String error = request.getParameter("error");
 					if (error != null && error.equals("true")) {
