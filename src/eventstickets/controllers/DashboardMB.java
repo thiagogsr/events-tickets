@@ -13,7 +13,7 @@ import eventstickets.dao.EventInscriptionDAO;
 import eventstickets.helpers.MessageHelper;
 import eventstickets.models.Event;
 
-@ManagedBean(name = "DashboardMB")
+@ManagedBean(name = "dashboardMB")
 @RequestScoped
 public class DashboardMB extends AuthenticateUser implements Serializable{
 	private static final long serialVersionUID = 1L;

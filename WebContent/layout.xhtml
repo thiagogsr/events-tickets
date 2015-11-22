@@ -15,31 +15,32 @@
     </h:head>
 
     <h:body>
-        <ui:insert name="top">
-        	<nav class="navbar navbar-default">
-        		<div class="container-fluid">
-        			<ul class="nav navbar-nav">
-        				<li><a href="../dashboard/index.xhtml">Events Tickets</a></li>
-        				<li><a href="../eventsInscriptions/index.xhtml">Inscrições em Eventos</a></li>
-        				<li><a href="../events/index.xhtml">Eventos</a></li>
-        				<li><a href="../talks/index.xhtml">Palestras</a></li>
-        				<li><a href="../miniCourses/index.xhtml">Mini Cursos</a></li>
-        				<li><a href="../places/index.xhtml">Lugares</a></li>
-        				<li><a href="../users/index.xhtml">Usuários</a></li>
-        			</ul>
-       				<ul class="nav navbar-nav navbar-right">
-       					<li><a href="#">Olá #{currentUser.name}</a></li>
-       					
-       					<li><a href="../logout.xhtml">Sair</a></li>
-       					
-       				</ul>
-        		</div>
-        	</nav>
-        </ui:insert>
-
-		<div class="container">
-            <ui:insert name="content"></ui:insert>
-        </div>
+    	<h:form>
+	        <ui:insert name="top">
+	        	<nav class="navbar navbar-default">
+	        		<div class="container-fluid">
+	        			<ul class="nav navbar-nav">
+	        				<li><a href="../dashboard/index.xhtml">Events Tickets</a></li>
+	        				<li><a href="../eventsInscriptions/index.xhtml">Inscrições em Eventos</a></li>
+	        				<li><a href="../events/index.xhtml">Eventos</a></li>
+	        				<li><a href="../talks/index.xhtml">Palestras</a></li>
+	        				<li><a href="../miniCourses/index.xhtml">Mini Cursos</a></li>
+	        				<li><a href="../places/index.xhtml">Lugares</a></li>
+	        				<li><a href="../users/index.xhtml">Usuários</a></li>
+	        			</ul>
+	       				<ul class="nav navbar-nav navbar-right">
+	       					<li><a href="#">Olá #{currentUser.name}</a></li>
+	       					
+	       					<li><h:commandLink value="Sair" action="#{logoutMB.logout}" /></li>
+	       				</ul>
+	        		</div>
+	        	</nav>
+	        </ui:insert>
+	
+			<div class="container">
+	            <ui:insert name="content"></ui:insert>
+	        </div>
+        </h:form>
 		
 		<script type="text/javascript" src="../vendor/js/jquery-1.10.1.min.js"></script>
 		<script type="text/javascript" src="../vendor/js/jquery.mask.js"></script>
