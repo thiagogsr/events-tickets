@@ -6,9 +6,11 @@ import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
 
+import eventstickets.dao.EventDAO;
 import eventstickets.dao.MiniCourseDAO;
 import eventstickets.dao.PlaceDAO;
 import eventstickets.dao.UserDAO;
+import eventstickets.models.Event;
 import eventstickets.models.MiniCourse;
 import eventstickets.models.Place;
 import eventstickets.models.Role;
@@ -23,6 +25,7 @@ public class MiniCourseMB extends AuthenticateUser implements Serializable {
 	private Integer id;
 	private Integer speakerId;
 	private Integer placeId;
+	private Integer eventId;
 	
 	public MiniCourseMB() {
 		checkPermission(MiniCoursePolicy.index(getCurrentUser()));
@@ -44,6 +47,7 @@ public class MiniCourseMB extends AuthenticateUser implements Serializable {
 		MiniCourseDAO dao = new MiniCourseDAO();
 		miniCourse.setSpeaker(fetchUser());
 		miniCourse.setPlace(fetchPlace());
+		miniCourse.setEvent(fetchEvent());
 
 		if (dao.create(miniCourse, getCurrentUser())) {
 			return "index";
@@ -64,11 +68,12 @@ public class MiniCourseMB extends AuthenticateUser implements Serializable {
 		MiniCourse oldMiniCourse = dao.find(miniCourse.getId());
 		oldMiniCourse.setTitle(miniCourse.getTitle());
 		oldMiniCourse.setQuantity(miniCourse.getQuantity());
-		oldMiniCourse.setValue(miniCourse.getValue());
+		oldMiniCourse.setPrice(miniCourse.getPrice());
 		oldMiniCourse.setObjective(miniCourse.getObjective());
 		oldMiniCourse.setDate(miniCourse.getDate());
 		oldMiniCourse.setPlace(fetchPlace());
 		oldMiniCourse.setSpeaker(fetchUser());
+		oldMiniCourse.setEvent(fetchEvent());
 		
 		if (dao.update(oldMiniCourse)) {
 			return "index?faces-redirect=true";
@@ -87,6 +92,18 @@ public class MiniCourseMB extends AuthenticateUser implements Serializable {
 		User user = new User();
 		user.setId(speakerId);
 		return user;
+	}
+	
+	private Place fetchPlace() {
+		Place place = new Place();
+		place.setId(placeId);
+		return place;
+	}
+	
+	private Event fetchEvent() {
+		Event event = new Event();
+		event.setId(eventId);
+		return event;
 	}
 
 	public MiniCourse getMinicourse() {
@@ -112,11 +129,13 @@ public class MiniCourseMB extends AuthenticateUser implements Serializable {
 	public void setPlaceId(Integer placeId) {
 		this.placeId = placeId;
 	}
+	
+	public Integer getEventId() {
+		return eventId;
+	}
 
-	private Place fetchPlace() {
-		Place place = new Place();
-		place.setId(placeId);
-		return place;
+	public void setEventId(Integer eventId) {
+		this.eventId = eventId;
 	}
 
 	public MiniCourse getMiniCourse() {
@@ -139,5 +158,10 @@ public class MiniCourseMB extends AuthenticateUser implements Serializable {
 	public List<User> getUsers() {
 		UserDAO userDAO = new UserDAO();
 		return userDAO.byRole(Role.SPEAKER);
+	}
+	
+	public List<Event> getEvents() {
+		EventDAO eventDAO = new EventDAO();
+		return eventDAO.all();
 	}
 }

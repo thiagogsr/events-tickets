@@ -16,9 +16,10 @@ public class MiniCourse {
 	private String title;
 	private Date Date;
 	private Place place;
+	private Event event;
 	private String objective;
 	private int quantity;
-	private String value;
+	private float price;
 	private Date createdAt;
 	private Date updatedAt;
 	private User speaker;
@@ -45,13 +46,23 @@ public class MiniCourse {
 	}
 	
 	@ManyToOne
-    @JoinColumn(name="placeid")
+    @JoinColumn(name="placeId")
 	public Place getPlace() {
 		return place;
 	}
 	
 	public void setPlace(Place place) {
 		this.place = place;
+	}
+	
+	@ManyToOne
+    @JoinColumn(name="eventId")
+	public Event getEvent() {
+		return event;
+	}
+	
+	public void setEvent(Event event) {
+		this.event = event;
 	}
 
 	public Date getCreatedAt() {
@@ -103,16 +114,16 @@ public class MiniCourse {
 		this.quantity = quantity;
 	}
 	
-	public String getValue() {
-		return value;
+	public float getPrice() {
+		return price;
 	}
 	
-	public void setValue(String value) {
-		this.value = value;
+	public void setPrice(float price) {
+		this.price = price;
 	}
 	
 	@ManyToOne
-    @JoinColumn(name="speakerid")
+    @JoinColumn(name="speakerId")
 	public User getSpeaker() {
 		return speaker;
 	}
