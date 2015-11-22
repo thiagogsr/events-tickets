@@ -18,7 +18,7 @@ public class MiniCourse {
 	private Place place;
 	private Event event;
 	private String objective;
-	private int quantity;
+	private int inscriptionsLimit;
 	private float price;
 	private Date createdAt;
 	private Date updatedAt;
@@ -81,7 +81,6 @@ public class MiniCourse {
 		this.updatedAt = updatedAt;
 	}
 	
-	@Column(unique=true)
 	public String getTitle() {
 		return title;
 	}
@@ -106,12 +105,12 @@ public class MiniCourse {
 		this.objective = objective;
 	}
 	
-	public int getQuantity() {
-		return quantity;
+	public int getInscriptionsLimit() {
+		return inscriptionsLimit;
 	}
 	
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
+	public void setInscriptionsLimit(int inscriptionsLimit) {
+		this.inscriptionsLimit = inscriptionsLimit;
 	}
 	
 	public float getPrice() {

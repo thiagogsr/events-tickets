@@ -45,7 +45,7 @@ public class MiniCourseMB extends AuthenticateUser implements Serializable {
 
 	private String create() {
 		MiniCourseDAO dao = new MiniCourseDAO();
-		miniCourse.setSpeaker(fetchUser());
+		miniCourse.setSpeaker(fetchSpeaker());
 		miniCourse.setPlace(fetchPlace());
 		miniCourse.setEvent(fetchEvent());
 
@@ -67,12 +67,12 @@ public class MiniCourseMB extends AuthenticateUser implements Serializable {
 
 		MiniCourse oldMiniCourse = dao.find(miniCourse.getId());
 		oldMiniCourse.setTitle(miniCourse.getTitle());
-		oldMiniCourse.setQuantity(miniCourse.getQuantity());
+		oldMiniCourse.setInscriptionsLimit(miniCourse.getInscriptionsLimit());
 		oldMiniCourse.setPrice(miniCourse.getPrice());
 		oldMiniCourse.setObjective(miniCourse.getObjective());
 		oldMiniCourse.setDate(miniCourse.getDate());
 		oldMiniCourse.setPlace(fetchPlace());
-		oldMiniCourse.setSpeaker(fetchUser());
+		oldMiniCourse.setSpeaker(fetchSpeaker());
 		oldMiniCourse.setEvent(fetchEvent());
 		
 		if (dao.update(oldMiniCourse)) {
@@ -88,10 +88,10 @@ public class MiniCourseMB extends AuthenticateUser implements Serializable {
 		return "index?faces-redirect=true";
 	}
 
-	private User fetchUser() {
-		User user = new User();
-		user.setId(speakerId);
-		return user;
+	private User fetchSpeaker() {
+		User speaker = new User();
+		speaker.setId(speakerId);
+		return speaker;
 	}
 	
 	private Place fetchPlace() {
