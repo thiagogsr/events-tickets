@@ -28,10 +28,11 @@ public class MiniCourseMB extends AuthenticateUser implements Serializable {
 	private Integer eventId;
 	
 	public MiniCourseMB() {
+		super();
 		checkPermission(MiniCoursePolicy.index(getCurrentUser()));
 	}
 
-	public List<MiniCourse> all() {
+	public List<MiniCourse> getAll() {
 		return new MiniCourseDAO().all();
 	}
 

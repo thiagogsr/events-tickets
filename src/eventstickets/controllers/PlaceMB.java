@@ -20,6 +20,7 @@ public class PlaceMB extends AuthenticateUser implements Serializable {
 	private Integer id;
 	
 	public PlaceMB() {
+		super();
 		checkPermission(PlacePolicy.index(getCurrentUser()));
 	}
 

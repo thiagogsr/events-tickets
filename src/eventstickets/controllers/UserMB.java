@@ -19,6 +19,7 @@ public class UserMB extends AuthenticateUser implements Serializable{
 	private Integer id;
 	
 	public UserMB() {
+		new AuthenticateUser();
 		checkPermission(UserPolicy.index(getCurrentUser()));
 	}
 
