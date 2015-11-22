@@ -29,14 +29,14 @@
 			   	<div class="form-group row">
 			   		<div class="col-md-6">
 						<label for="user">Palestrante</label>
-						<h:selectOneMenu class="form-control" id="ministrante" value="#{miniCourseMB.speakerId}" required="true" requiredMessage="Informe o Ministrante">
+						<h:selectOneMenu class="form-control" id="ministrante" value="#{miniCourseMB.speakerId}" required="true" requiredMessage="Informe o Palestrante">
 	  						<f:selectItems value="#{miniCourseMB.users}" var="user" itemLabel="#{user.name}" itemValue="#{user.id}"/>
 			   			</h:selectOneMenu>
 			   		</div>
 			   		
 			   		<div class="col-md-6">
-						<label for="date">Data do Mini Curso</label>
-						<h:inputText styleClass="form-control" value="#{miniCourseMB.miniCourse.date}" id="date" required="true"
+						<label for="date">Data</label>
+						<h:inputText styleClass="form-control dateTime" value="#{miniCourseMB.miniCourse.date}" id="date" required="true"
 							requiredMessage="Informe a Data">
 							<f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
 						</h:inputText>
@@ -50,14 +50,14 @@
 					</div>
 					
 					<div class="col-md-4">
-						<label for="value">Valor</label>
+						<label for="value money">Valor</label>
 						<h:inputText styleClass="form-control" value="#{miniCourseMB.miniCourse.value}" id="value"  />
 					</div>
 					
 					<div class="col-md-4">
-						<label for="quantity">Limite de inscritos</label>
+						<label for="quantity">Lotação</label>
 						<h:inputText styleClass="form-control" value="#{miniCourseMB.miniCourse.quantity}" id="quantity" required="true"
-							requiredMessage="Informe a Quantidade de Pessoas" />
+							requiredMessage="Informe a Quantidade de Máxima de Inscrições" />
 					</div>
 				</div>
 
