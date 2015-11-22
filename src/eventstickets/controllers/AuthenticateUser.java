@@ -32,7 +32,7 @@ public class AuthenticateUser {
 	protected void checkPermission(boolean allowed) {
 		if (!allowed) {
 			try {
-				FacesContext.getCurrentInstance().getExternalContext().redirect("../dashboard/index.xhtml");
+				FacesContext.getCurrentInstance().getExternalContext().redirect("../dashboard/index.xhtml?denied=true");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
