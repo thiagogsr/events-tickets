@@ -31,6 +31,7 @@ public class EventInscriptionDAO extends MainDAO{
 		Query eventInscriptionsQuery = manager.createQuery("select count(*)" +
 														   " from eventstickets.models.EventInscription eventInscription" +
 														   " where eventInscription.event.id = :eventId");
+		
 		eventInscriptionsQuery.setParameter("eventId", eventId);
 		Long count = (Long)eventInscriptionsQuery.getSingleResult(); 
 		return count;
@@ -40,7 +41,7 @@ public class EventInscriptionDAO extends MainDAO{
 		EntityManager manager = openSession();
 		Query eventsQuery = manager.createQuery("select event from eventstickets.models.EventInscription eventInscription" +
 												" join eventInscription.event event" +
-												" where eventInscription.user.id in (:userId)");
+												" where eventInscription.user.id = (:userId)");
 		eventsQuery.setParameter("userId", userId);
 		List<Event> events = eventsQuery.getResultList();
 		return events;
@@ -52,8 +53,9 @@ public class EventInscriptionDAO extends MainDAO{
 												" where event.inscriptionsStartDate <= :today" +
 												" and event.inscriptionsEndDate >= :today" +
 												" and not exists (from eventstickets.models.EventInscription eventInscription" +
-												" where eventInscription.user.id in (:userId)" + 
+												" where eventInscription.user.id = (:userId)" + 
 												" and eventInscription.event.id = event.id)");
+		
 		eventsQuery.setParameter("today", new Date());
 		eventsQuery.setParameter("userId", userId);
 		List<Event> events = eventsQuery.getResultList();
@@ -67,6 +69,7 @@ public class EventInscriptionDAO extends MainDAO{
 										  "INNER JOIN ei.event e " +
 										  "INNER JOIN ei.user u " +
 										  "WHERE e.id = :eventId");
+		
 		query.setParameter("eventId", eventId);
 		List events = query.getResultList();
 		return events;
