@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import eventstickets.models.MiniCourse;
 import eventstickets.models.User;
@@ -15,10 +16,10 @@ public class MiniCourseDAO extends MainDAO {
 		try {
 			miniCourse.setCreatedAt(new Date());
 			miniCourse.setCreatedBy(currentUser);
-		    manager.getTransaction().begin();
-		    manager.persist(miniCourse);
-		    manager.getTransaction().commit();
-		    return true;
+			manager.getTransaction().begin();
+			manager.persist(miniCourse);
+			manager.getTransaction().commit();
+			return true;
 		} catch (Exception e) {
 			manager.getTransaction().rollback();
 			return false;
@@ -31,9 +32,9 @@ public class MiniCourseDAO extends MainDAO {
 		EntityManager manager = openSession();
 		try {
 			manager.getTransaction().begin();
-		    manager.merge(minicourse);
-		    manager.getTransaction().commit();
-		    return true;
+			manager.merge(minicourse);
+			manager.getTransaction().commit();
+			return true;
 		} catch (Exception e) {
 			manager.getTransaction().rollback();
 			return false;
@@ -66,6 +67,20 @@ public class MiniCourseDAO extends MainDAO {
 	public List<MiniCourse> all() {
 		EntityManager manager = openSession();
 		List<MiniCourse> miniCourses = manager.createQuery("from eventstickets.models.MiniCourse").getResultList();
+		return miniCourses;
+	}
+
+	public List<MiniCourse> notRegistered(int userId, int eventId) {
+		EntityManager manager = openSession();
+		Query miniCourseQuery = manager.createQuery("from eventstickets.models.MiniCourse miniCourse" +
+				" where miniCourse.event.id = :eventId" +
+				" and not exists (from eventstickets.models.MiniCourseInscription miniCourseInscription" +
+				" where miniCourseInscription.participant.id = :userId" +
+				" and miniCourseInscription.miniCourse.id = miniCourse.id)");
+
+		miniCourseQuery.setParameter("userId", userId);
+		miniCourseQuery.setParameter("eventId", eventId);
+		List<MiniCourse> miniCourses = miniCourseQuery.getResultList();
 		return miniCourses;
 	}
 }

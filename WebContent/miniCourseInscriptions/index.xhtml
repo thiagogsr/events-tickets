@@ -5,44 +5,73 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html">
-<ui:composition template="../layout.xhtml">
+	
+	<ui:composition template="../layout.xhtml">
 	    <ui:define name="content">
 			<div class="row">
 				<div class="col-md-12">
-					<h2>Inscrição do Mini Curso</h2>
+					<h2>Mini Cursos</h2>
+					<h3>#{miniCourseInscriptionMB.event.title}</h3>
+					
 					<h:form>
-					<h:messages errorClass="alert alert-danger" infoClass="alert alert-success" styleClass="messages" />
-						<h:dataTable value="#{miniCourseInscriptionMB.mini}" var="i" styleClass="table">
+						<h:messages errorClass="alert alert-danger" infoClass="alert alert-success" styleClass="messages" />
+						
+						<h4>Não inscrito</h4>
+						<h:dataTable value="#{miniCourseInscriptionMB.notRegistered}" var="i" styleClass="table">
 							<h:column>
 								<f:facet name="header">Mini Curso</f:facet>
 					    		#{i.title}
-						</h:column>
+							</h:column>
 							<h:column>
 								<f:facet name="header">Lugar</f:facet>
 					    		#{i.place.title}
-					   </h:column>
+					   		</h:column>
 						    <h:column>
 								<f:facet name="header">Valor</f:facet>
-					    		#{i.value}
-					   </h:column>
-					   <h:column>
-								<f:facet name="header">Quantidade</f:facet>
-					    		#{i.quantity}
-					   </h:column>
+					    		#{i.price}
+					   		</h:column>
+						    <h:column>
+								<f:facet name="header">Data</f:facet>
+					    		<h:outputText value="#{i.date}" >
+									<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+								</h:outputText>
+					   		</h:column>
 							<h:column>
-								<f:facet name="header">Criado em</f:facet>
-									<h:outputText value="#{i.createdAt}" >
-										<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
-								 </h:outputText>
-						</h:column>
-						<h:column>
-							<h:commandLink action="#{miniCourseInscriptionMB.create}" value="Inscreva-se">
-								<f:setPropertyActionListener target="#{miniCourseInscriptionMB.miniCourseId}" value="#{i.id}" />
-								<f:setPropertyActionListener target="#{miniCourseInscriptionMB.miniCourseInscription.price}" value="#{i.value}" />
-							</h:commandLink>
-						</h:column>
-				</h:dataTable>
-			</h:form>
+								<h:commandLink action="#{miniCourseInscriptionMB.create}" value="Inscreva-se">
+									<f:setPropertyActionListener target="#{miniCourseInscriptionMB.miniCourseId}" value="#{i.id}" />
+									<f:setPropertyActionListener target="#{miniCourseInscriptionMB.miniCourseInscription.price}" value="#{i.price}" />
+								</h:commandLink>
+							</h:column>
+						</h:dataTable>
+						
+						<h4>Inscrito</h4>
+						<h:dataTable value="#{miniCourseInscriptionMB.registered}" var="i" styleClass="table">
+							<h:column>
+								<f:facet name="header">Mini Curso</f:facet>
+					    		#{i.miniCourse.title}
+							</h:column>
+							<h:column>
+								<f:facet name="header">Lugar</f:facet>
+					    		#{i.miniCourse.place.title}
+					   		</h:column>
+						    <h:column>
+								<f:facet name="header">Valor</f:facet>
+					    		#{i.miniCourse.price}
+					   		</h:column>
+						    <h:column>
+								<f:facet name="header">Data</f:facet>
+					    		<h:outputText value="#{i.miniCourse.date}" >
+									<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+								</h:outputText>
+					   		</h:column>
+					   		<h:column>
+								<f:facet name="header">Inscrição</f:facet>
+					    		<h:outputText value="#{i.createdAt}" >
+									<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+								</h:outputText>
+					   		</h:column>
+						</h:dataTable>
+					</h:form>
 				</div>
 			</div>
 		</ui:define>

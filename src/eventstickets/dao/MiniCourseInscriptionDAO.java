@@ -6,19 +6,18 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import eventstickets.models.MiniCourse;
 import eventstickets.models.MiniCourseInscription;
 
-public class MiniCourseInscriptionDAO  extends MainDAO{
-	public boolean create (MiniCourseInscription miniCourseInscription){
+public class MiniCourseInscriptionDAO extends MainDAO {
+	public boolean create(MiniCourseInscription miniCourseInscription) {
 		EntityManager manager = openSession();
-		try{
+		try {
 			manager.getTransaction().begin();
 			miniCourseInscription.setCreatedAt(new Date());
 			manager.persist(miniCourseInscription);
 			manager.getTransaction().commit();
 			return true;
-		} catch (Exception e){
+		} catch (Exception e) {
 			manager.getTransaction().rollback();
 			return false;
 		} finally {
@@ -26,32 +25,25 @@ public class MiniCourseInscriptionDAO  extends MainDAO{
 		}
 	}
 
-	public Long totalInsriptionMiniCourse(Integer miniCourseId){
+	public Long totalInsriptionMiniCourse(Integer miniCourseId) {
 		EntityManager manager = openSession();
-		Query miniCourseInscriptionQuery = manager.createQuery("select count(*) " +
-															                             "from eventstickets.models.MiniCourseInscription miniCourseInscription " +
-																													 "where miniCourseInscription.miniCourse.id = :miniCourseId");
+		Query miniCourseInscriptionQuery = manager.createQuery(
+				"select count(*) " + "from eventstickets.models.MiniCourseInscription miniCourseInscription "
+						+ "where miniCourseInscription.miniCourse.id = :miniCourseId");
+
 		miniCourseInscriptionQuery.setParameter("miniCourseId", miniCourseId);
-		Long count = (Long)miniCourseInscriptionQuery.getSingleResult();
+		Long count = (Long) miniCourseInscriptionQuery.getSingleResult();
 		return count;
 	}
 
-	public List<MiniCourse> getMiniCourseByUserId(Integer userId){
+	public List<MiniCourseInscription> registered(Integer eventId) {
 		EntityManager manager = openSession();
-		Query miniCourseQuery = manager.createQuery("from eventstickets.models.MiniCourse miniCourse " +
-																								"where not exists ( " +
-																								"from eventstickets.models.MiniCourseInscription miniCourseInscription " +
-																								"where miniCourseInscription.user.id in (:userId) " +
-																								"and miniCourseInscription.miniCourse.id = miniCourse.id)");
-		miniCourseQuery.setParameter("userId", userId);
-		List<MiniCourse> miniCourse = miniCourseQuery.getResultList();
-		return miniCourse;
-	}
+		Query miniCourseInscriptionQuery = manager
+				.createQuery("from eventstickets.models.MiniCourseInscription miniCourseInscription "
+						+ "where miniCourseInscription.miniCourse.event.id = :eventId");
 
-	public List<MiniCourseInscription> all(){
-		EntityManager manager = openSession();
-		List<MiniCourseInscription> miniCourse = manager.createQuery("from eventstickets.models.MiniCourseInscription").getResultList();
-		return miniCourse;
+		miniCourseInscriptionQuery.setParameter("eventId", eventId);
+		List<MiniCourseInscription> miniCourseInscriptions = miniCourseInscriptionQuery.getResultList();
+		return miniCourseInscriptions;
 	}
-
 }
