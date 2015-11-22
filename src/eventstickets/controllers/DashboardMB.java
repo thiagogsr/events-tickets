@@ -19,7 +19,7 @@ public class DashboardMB extends AuthenticateUser implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	public DashboardMB() {
-		super();
+		new AuthenticateUser();
 		if (params().get("denied") != null) {
 			MessageHelper.addMensage("Você não tem permissão para acessar esta página.", FacesMessage.SEVERITY_ERROR);
 		}

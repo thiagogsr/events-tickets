@@ -28,7 +28,7 @@ public class MiniCourseMB extends AuthenticateUser implements Serializable {
 	private Integer eventId;
 	
 	public MiniCourseMB() {
-		super();
+		new AuthenticateUser();
 		checkPermission(MiniCoursePolicy.index(getCurrentUser()));
 	}
 

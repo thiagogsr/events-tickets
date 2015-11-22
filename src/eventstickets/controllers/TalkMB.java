@@ -28,7 +28,7 @@ public class TalkMB extends AuthenticateUser implements Serializable {
 	private Integer id;
 	
 	public TalkMB() {
-		super();
+		new AuthenticateUser();
 		checkPermission(TalkPolicy.index(getCurrentUser()));
 	}
 

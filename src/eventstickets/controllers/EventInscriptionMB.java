@@ -23,7 +23,7 @@ public class EventInscriptionMB extends AuthenticateUser implements Serializable
 	private Integer eventId;
 	
 	public EventInscriptionMB() {
-		super();
+		new AuthenticateUser();
 		checkPermission(EventPolicy.register(getCurrentUser()));
 	}
 	

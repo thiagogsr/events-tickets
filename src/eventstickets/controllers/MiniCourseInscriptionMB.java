@@ -23,7 +23,7 @@ public class MiniCourseInscriptionMB  extends AuthenticateUser implements Serial
 	private Integer miniCourseId;
 	
 	public MiniCourseInscriptionMB() {
-		super();
+		new AuthenticateUser();
 		checkPermission(EventPolicy.register(getCurrentUser()));
 	}
 			
