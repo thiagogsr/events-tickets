@@ -14,7 +14,7 @@
 					<h:form>
 						<h:messages errorClass="alert alert-danger" infoClass="alert alert-success" styleClass="messages" />
 
-						<h:dataTable value="#{minicourseMB.all}" var="m" styleClass="table">
+						<h:dataTable value="#{miniCourseMB.all}" var="m" styleClass="table">
 							<h:column>
 								<f:facet name="header">Título</f:facet>
 					    		#{m.title}
@@ -48,13 +48,13 @@
 					    		#{m.createdBy.name}
 							</h:column>
 							<h:column>
-								<h:commandLink action="#{minicourseMB.edit}" value="Editar">
-									<f:setPropertyActionListener target="#{minicourseMB.id}" value="#{m.id}" />
+								<h:commandLink action="#{miniCourseMB.edit}" value="Editar">
+									<f:setPropertyActionListener target="#{miniCourseMB.id}" value="#{m.id}" />
 								</h:commandLink>
 							</h:column>
 							<h:column>
-								<h:commandLink action="#{minicourseMB.destroy}" value="Remover">
-									<f:setPropertyActionListener target="#{minicourseMB.id}" value="#{m.id}" />
+								<h:commandLink action="#{miniCourseMB.destroy}" value="Remover">
+									<f:setPropertyActionListener target="#{miniCourseMB.id}" value="#{m.id}" />
 								</h:commandLink>
 							</h:column>
 						</h:dataTable>
