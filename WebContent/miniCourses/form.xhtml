@@ -21,7 +21,7 @@
 					<div class="col-md-6">
 						<label for="place">Lugar</label>
 						<h:selectOneMenu class="form-control" id="place" value="#{miniCourseMB.placeId}" required="true" requiredMessage="Informe o Lugar">
-	  						<f:selectItems value="#{miniCourseMB.places}" var="places" itemLabel="#{place.title}" itemValue="#{place.id}"/>
+	  						<f:selectItems value="#{miniCourseMB.places}" var="place" itemLabel="#{place.title}" itemValue="#{place.id}"/>
 			   			</h:selectOneMenu>
 			   		</div>
 			   	</div>
