@@ -11,34 +11,39 @@
 			<div class="col-md-12">
 				<h2>Inscrições</h2>
 				
-				<h:messages errorClass="alert alert-danger" infoClass="alert alert-success" styleClass="messages" />
-				
-				<h:dataTable value="#{dashboardMB.events}" var="u" styleClass="table">
-					<h:column>
-						<f:facet name="header">Título</f:facet>
-				    		#{u.title}
-					</h:column>
-					<h:column>
-							<f:facet name="header">Local</f:facet>
-					    		#{u.place.title}
-					</h:column>
-					<h:column>
-							<f:facet name="header">Início</f:facet>
-					    		<h:outputText value="#{u.startDate}">
-									<f:convertDateTime pattern="dd/MM/yyyy" />
-								</h:outputText>
-					</h:column>
+				<h:form>
+					<h:messages errorClass="alert alert-danger" infoClass="alert alert-success" styleClass="messages" />
+					
+					<h:dataTable value="#{dashboardMB.events}" var="u" styleClass="table">
 						<h:column>
-							<f:facet name="header">Término</f:facet>
-					    		<h:outputText value="#{u.endDate}">
-									<f:convertDateTime pattern="dd/MM/yyyy" />
-								</h:outputText>
-					</h:column>
-					<h:column>
-							<f:facet name="header">Preço</f:facet>
-					    		#{u.price}
-					</h:column>
-				</h:dataTable>
+							<f:facet name="header">Título</f:facet>
+					    		#{u.title}
+						</h:column>
+						<h:column>
+								<f:facet name="header">Local</f:facet>
+						    		#{u.place.title}
+						</h:column>
+						<h:column>
+								<f:facet name="header">Início</f:facet>
+						    		<h:outputText value="#{u.startDate}">
+										<f:convertDateTime pattern="dd/MM/yyyy" />
+									</h:outputText>
+						</h:column>
+							<h:column>
+								<f:facet name="header">Término</f:facet>
+						    		<h:outputText value="#{u.endDate}">
+										<f:convertDateTime pattern="dd/MM/yyyy" />
+									</h:outputText>
+						</h:column>
+						<h:column>
+								<f:facet name="header">Preço</f:facet>
+						    		#{u.price}
+						</h:column>
+						<h:column>
+							<h:outputLink value="../miniCourseInscriptions/index.xhtml?eventId=#{u.id}">Mini Cursos</h:outputLink>
+						</h:column>
+					</h:dataTable>
+				</h:form>
 			</div>
 		</div>
 	</ui:define>
