@@ -33,7 +33,7 @@ public class MiniCourseInscriptionMB  extends AuthenticateUser implements Serial
 	public void create(){
 		MiniCourseInscriptionDAO dao = new MiniCourseInscriptionDAO();
 		MiniCourse miniCourse = (MiniCourse) getMiniCourse();
-		if(dao.totalInsriptionMiniCourse(miniCourse.getId()) < miniCourse.getQuantity()){
+		if(dao.totalInsriptionMiniCourse(miniCourse.getId()) < miniCourse.getInscriptionsLimit()){
 			miniCourseInscription.setParticipant(getCurrentUser());
 			miniCourseInscription.setMini(miniCourse);
 			dao.create(miniCourseInscription);
