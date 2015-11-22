@@ -7,8 +7,11 @@ import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
 
 import eventstickets.dao.MiniCourseDAO;
+import eventstickets.dao.PlaceDAO;
+import eventstickets.dao.UserDAO;
 import eventstickets.models.MiniCourse;
 import eventstickets.models.Place;
+import eventstickets.models.Role;
 import eventstickets.models.User;
 import eventstickets.policies.MiniCoursePolicy;
 
@@ -18,8 +21,6 @@ public class MiniCourseMB extends AuthenticateUser implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private MiniCourse miniCourse = new MiniCourse();
 	private Integer id;
-	private List<Place> places;
-	private List<User> users;
 	private Integer speakerId;
 	private Integer placeId;
 	
@@ -130,23 +131,13 @@ public class MiniCourseMB extends AuthenticateUser implements Serializable {
 		this.id = id;
 	}
 
-
 	public List<Place> getPlaces() {
-		return places;
+		PlaceDAO placeDAO = new PlaceDAO();
+		return placeDAO.all();
 	}
-
-
-	public void setPlaces(List<Place> places) {
-		this.places = places;
-	}
-
 
 	public List<User> getUsers() {
-		return users;
-	}
-
-
-	public void setUsers(List<User> users) {
-		this.users = users;
+		UserDAO userDAO = new UserDAO();
+		return userDAO.byRole(Role.SPEAKER);
 	}
 }
