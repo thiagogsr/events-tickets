@@ -23,21 +23,24 @@ public class MiniCourseInscriptionMB  extends AuthenticateUser implements Serial
 	private static final long serialVersionUID = 1L;
 	private MiniCourseInscription miniCourseInscription = new MiniCourseInscription();
 	private Integer miniCourseId;
-	
+	private String eventId;
+
 	public MiniCourseInscriptionMB() {
 		new AuthenticateUser();
 		checkPermission(EventPolicy.register(getCurrentUser()));
 	}
-	
+
 	public List<MiniCourse> getNotRegistered() {
-		return new MiniCourseDAO().notRegistered(getCurrentUser().getId(), getEventId());
-	}
-	
-	public List<MiniCourseInscription> getRegistered() {
-		return new MiniCourseInscriptionDAO().registered(getEventId());
+		trySetEventId();
+		return new MiniCourseDAO().notRegistered(getCurrentUser().getId(), Integer.parseInt(getEventId()));
 	}
 
-	public void create(){
+	public List<MiniCourseInscription> getRegistered() {
+		trySetEventId();
+		return new MiniCourseInscriptionDAO().registered(Integer.parseInt(getEventId()));
+	}
+
+	public String create() {
 		MiniCourseInscriptionDAO dao = new MiniCourseInscriptionDAO();
 		MiniCourse miniCourse = getMiniCourse();
 		if(dao.totalInsriptionMiniCourse(miniCourse.getId()) < miniCourse.getInscriptionsLimit()){
@@ -46,36 +49,48 @@ public class MiniCourseInscriptionMB  extends AuthenticateUser implements Serial
 			dao.create(miniCourseInscription);
 			MessageHelper.addMensage("Inscrição no Mini Curso " + miniCourse.getTitle() + " realizada com sucesso.", FacesMessage.SEVERITY_INFO);
 		} else {
-			MessageHelper.addMensage("Nãoo há mais vagas para o Mini Curso " + miniCourse.getTitle() + ".", FacesMessage.SEVERITY_ERROR);
+			MessageHelper.addMensage("Não há mais vagas para o Mini Curso " + miniCourse.getTitle() + ".", FacesMessage.SEVERITY_ERROR);
 		}
+		return "index?eventId=#{eventId}";
 	}
-	
+
 	private MiniCourse getMiniCourse(){
 		return new MiniCourseDAO().find(miniCourseId);
 	}
-	
+
 	public MiniCourseInscription getMiniCourseInscription() {
 		return miniCourseInscription;
 	}
-	
+
 	public void setMiniCourseInscription(MiniCourseInscription miniCourseInscription) {
 		this.miniCourseInscription = miniCourseInscription;
 	}
-	
+
 	public Integer getMiniCourseId() {
 		return miniCourseId;
 	}
-	
+
 	public void setMiniCourseId(Integer miniCourseId) {
 		this.miniCourseId = miniCourseId;
 	}
 
-	public Integer getEventId() {
-		return Integer.parseInt(params().get("eventId"));
+	public String getEventId() {
+		return eventId;
 	}
-	
+
+	public void setEventId(String eventId) {
+		this.eventId = eventId;
+	}
+
 	public Event getEvent() {
-		return new EventDAO().find(getEventId());
+		trySetEventId();
+		return new EventDAO().find(Integer.parseInt(getEventId()));
+	}
+
+	private void trySetEventId() {
+		if (eventId == null) {
+			this.setEventId(params().get("eventId"));
+		}
 	}
 }
 

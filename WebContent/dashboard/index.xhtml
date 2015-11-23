@@ -42,7 +42,9 @@
 							    		#{u.price}
 							</h:column>
 							<h:column>
-								<h:outputLink value="../miniCourseInscriptions/index.xhtml?eventId=#{u.id}">Mini Cursos</h:outputLink>
+								<h:link outcome="/miniCourseInscriptions/index" value="Mini Cursos" includeViewParams="true">
+									<f:param name="eventId" value="#{u.id}" />
+								</h:link>
 							</h:column>
 						</h:dataTable>
 					</h:form>

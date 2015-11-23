@@ -70,7 +70,7 @@ public class MiniCourseDAO extends MainDAO {
 		return miniCourses;
 	}
 
-	public List<MiniCourse> notRegistered(int userId, int eventId) {
+	public List<MiniCourse> notRegistered(Integer userId, Integer eventId) {
 		EntityManager manager = openSession();
 		Query miniCourseQuery = manager.createQuery("from eventstickets.models.MiniCourse miniCourse" +
 				" where miniCourse.event.id = :eventId" +
