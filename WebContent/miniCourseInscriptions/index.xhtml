@@ -14,6 +14,10 @@
 					<h3>#{miniCourseInscriptionMB.event.title}</h3>
 					
 					<h:form>
+						<f:metadata>
+					    	<f:viewParam name="eventId" value="#{miniCourseInscriptionMB.eventId}" />
+					    </f:metadata>
+					    
 						<h:messages errorClass="alert alert-danger" infoClass="alert alert-success" styleClass="messages" />
 						
 						<h4>Não inscrito</h4>
@@ -38,7 +42,7 @@
 					   		</h:column>
 							<h:column>
 								<h:commandLink action="#{miniCourseInscriptionMB.create}" value="Inscreva-se">
-									<f:setPropertyActionListener target="#{miniCourseInscriptionMB.eventId}" value="#{i.event.id}" />
+									<f:param name="eventId" value="#{miniCourseInscriptionMB.eventId}" />
 									<f:setPropertyActionListener target="#{miniCourseInscriptionMB.miniCourseId}" value="#{i.id}" />
 									<f:setPropertyActionListener target="#{miniCourseInscriptionMB.miniCourseInscription.price}" value="#{i.price}" />
 								</h:commandLink>
