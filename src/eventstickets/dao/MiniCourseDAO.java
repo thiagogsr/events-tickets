@@ -83,4 +83,15 @@ public class MiniCourseDAO extends MainDAO {
 		List<MiniCourse> miniCourses = miniCourseQuery.getResultList();
 		return miniCourses;
 	}
+	
+	public List getMiniCoursesByEvent(Integer eventId){
+		EntityManager manager = openSession();
+		Query query = manager.createQuery("SELECT miniCourse " +
+										  "FROM eventstickets.models.MiniCourse miniCourse " +
+										  "INNER JOIN miniCourse.event e " +
+										  "WHERE e.id = :eventId");
+		query.setParameter("eventId", eventId);
+		List events = query.getResultList();
+		return events;
+	}
 }

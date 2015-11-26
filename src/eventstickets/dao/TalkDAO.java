@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import eventstickets.models.Talk;
 import eventstickets.models.User;
@@ -66,5 +67,18 @@ public class TalkDAO extends MainDAO {
 		EntityManager manager = openSession();
 		List<Talk> talks = manager.createQuery("from eventstickets.models.Talk").getResultList();
 		return talks;
+	}
+	
+	public List getTalkByEvent(Integer eventId){
+		EntityManager manager = openSession();
+		Query query = manager.createQuery("SELECT talk " +
+										  "FROM eventstickets.models.Talk talk " +
+										  "INNER JOIN talk.event e " +
+										  "INNER JOIN talk.place p " +
+										  "INNER JOIN talk.speaker s " +
+										  "WHERE e.id = :eventId");
+		query.setParameter("eventId", eventId);
+		List events = query.getResultList();
+		return events;
 	}
 }

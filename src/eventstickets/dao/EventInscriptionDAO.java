@@ -74,4 +74,15 @@ public class EventInscriptionDAO extends MainDAO{
 		List events = query.getResultList();
 		return events;
 	}
+
+	public List getEventsInscriptionsByEvent(Integer eventId){
+		EntityManager manager = openSession();
+		Query query = manager.createQuery("SELECT ei " +
+										  "FROM eventstickets.models.EventInscription ei " +
+										  "INNER JOIN ei.event e " +
+										  "WHERE e.id = :eventId");
+		query.setParameter("eventId", eventId);
+		List events = query.getResultList();
+		return events;
+	}
 }

@@ -15,10 +15,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import eventstickets.dao.EventDAO;
 import eventstickets.dao.EventInscriptionDAO;
+import eventstickets.dao.MiniCourseDAO;
 import eventstickets.dao.PlaceDAO;
+import eventstickets.dao.TalkDAO;
 import eventstickets.helpers.MessageHelper;
 import eventstickets.models.Event;
+import eventstickets.models.EventInscription;
+import eventstickets.models.MiniCourse;
 import eventstickets.models.Place;
+import eventstickets.models.Talk;
 import eventstickets.policies.EventPolicy;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -121,6 +126,29 @@ public class EventMB extends AuthenticateUser implements Serializable {
 	
 	private InputStream getReportInputStream(){
 		return this.getClass().getResourceAsStream("../report/inscriptionsByEvent.jasper");
+	}
+	
+	public String details() {
+		checkPermission(EventPolicy.details(getCurrentUser()));
+		EventDAO dao = new EventDAO();
+		event = dao.find(id);
+		placeId = event.getPlace().getId();
+		return "detailsEvent";
+	}
+	
+	public List<Talk> getTalks() {
+		TalkDAO dao = new TalkDAO();
+		return dao.getTalkByEvent(id);
+	}
+	
+	public List<EventInscription> getEventInscriptions() {
+		EventInscriptionDAO dao = new EventInscriptionDAO();
+		return dao.getEventsInscriptionsByEvent(id);
+	}
+	
+	public List<MiniCourse> getMiniCourses() {
+		MiniCourseDAO dao = new MiniCourseDAO();
+		return dao.getMiniCoursesByEvent(id);
 	}
 	
 	private Place fetchPlace() {

@@ -71,6 +71,11 @@
 								<f:setPropertyActionListener target="#{eventMB.id}" value="#{u.id}" />
 							</h:commandLink>
 						</h:column>
+						<h:column>
+							<h:commandLink action="#{eventMB.details()}" value="Detalhes">
+								<f:setPropertyActionListener target="#{eventMB.id}" value="#{u.id}" />
+							</h:commandLink>
+						</h:column>
 					</h:dataTable>
 				</h:form>
 			</div>
