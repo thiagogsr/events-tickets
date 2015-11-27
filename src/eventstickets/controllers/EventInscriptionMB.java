@@ -11,13 +11,11 @@ import javax.faces.bean.RequestScoped;
 
 import eventstickets.dao.EventDAO;
 import eventstickets.dao.EventInscriptionDAO;
-import eventstickets.dao.MiniCourseDAO;
 import eventstickets.dao.MiniCourseInscriptionDAO;
 import eventstickets.dao.TalkDAO;
 import eventstickets.helpers.MessageHelper;
 import eventstickets.models.Event;
 import eventstickets.models.EventInscription;
-import eventstickets.models.MiniCourse;
 import eventstickets.models.MiniCourseInscription;
 import eventstickets.models.Talk;
 import eventstickets.policies.EventPolicy;
