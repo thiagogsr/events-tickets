@@ -46,6 +46,11 @@
 									<f:param name="eventId" value="#{u.id}" />
 								</h:link>
 							</h:column>
+							<h:column>
+								<h:link outcome="/eventsInscriptions/detailsInscription" value="Detalhes" includeViewParams="true">
+									<f:param name="eventId" value="#{u.id}" />
+								</h:link>
+							</h:column>
 						</h:dataTable>
 					</h:form>
 				</c:if>

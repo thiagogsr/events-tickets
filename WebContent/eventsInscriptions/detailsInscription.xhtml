@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<ui:composition template="../layout.xhtml">
+	<ui:define name="content">
+		<div class="row">
+			<div class="col-md-12">
+				<h:form>
+					<h2>Evento</h2>
+					<ul>
+						<li>
+							<h:outputText value="Título: " /> 
+							<h:outputText value="#{eventInscriptionMB.event.title}" />
+						</li>
+						<li>
+							<h:outputText value="Local: " /> 
+							<h:outputText value="#{eventInscriptionMB.event.place.title}" />
+						</li>
+						<li>
+							<h:outputText value="Início do evento: " /> 
+							<h:outputText value="#{eventInscriptionMB.event.startDate}">
+								<f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+							</h:outputText>
+						</li>
+						<li>
+							<h:outputText value="Fim do evento: " /> 
+							<h:outputText value="#{eventInscriptionMB.event.endDate}">
+								<f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+							</h:outputText>
+						</li>
+						<li>
+							<h:outputText value="Data de início das incrições: " /> 
+							<h:outputText value="#{eventInscriptionMB.event.inscriptionsStartDate}">
+								<f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+							</h:outputText>
+						</li>
+						<li>
+							<h:outputText value="Data de fim das incrições: " /> 
+							<h:outputText value="#{eventInscriptionMB.event.inscriptionsEndDate}">
+								<f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+							</h:outputText>
+						</li>
+					</ul>
+					<h2>Palestras</h2>
+					<ul>
+						<ui:repeat var="talk" value="#{eventInscriptionMB.talks}">
+							<li>
+								<h:outputText value="Título: " /> 
+								<h:outputText value="#{talk.description}" />
+							</li>
+							<li>
+								<h:outputText value="Local: " /> 
+								<h:outputText value="#{talk.place.title}" />
+							</li>
+							<li>
+								<h:outputText value="Data da palestra: " /> 
+								<h:outputText value="#{talk.startDate}">
+									<f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+								</h:outputText>
+							</li>
+							<li>
+								<h:outputText value="Palestrante: " /> 
+								<h:outputText value="#{talk.speaker.name}" />
+							</li>
+						</ui:repeat>
+					</ul>
+					<h2>Mini cursos</h2>
+					<ul>
+						<ui:repeat var="miniCourseIncription" value="#{eventInscriptionMB.miniCourseInscription}">
+							<li>
+								<h:outputText value="Título: " /> 
+								<h:outputText value="#{miniCourseIncription.miniCourse.title}" />
+							</li>
+							<li>
+								<h:outputText value="Local: " /> 
+								<h:outputText value="#{miniCourseIncription.miniCourse.place.title}" />
+							</li>
+							<li>
+								<h:outputText value="Ministrante: " /> 
+								<h:outputText value="#{miniCourseIncription.miniCourse.speaker.name}" />
+							</li>
+							<li>
+								<h:outputText value="Data de realização: " /> 
+								<h:outputText value="#{miniCourseIncription.miniCourse.date}">
+									<f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+								</h:outputText>
+							</li>
+						</ui:repeat>
+					</ul>
+				</h:form>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

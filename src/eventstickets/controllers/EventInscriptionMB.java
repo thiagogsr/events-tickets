@@ -6,13 +6,20 @@ import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
 import eventstickets.dao.EventDAO;
 import eventstickets.dao.EventInscriptionDAO;
+import eventstickets.dao.MiniCourseDAO;
+import eventstickets.dao.MiniCourseInscriptionDAO;
+import eventstickets.dao.TalkDAO;
 import eventstickets.helpers.MessageHelper;
 import eventstickets.models.Event;
 import eventstickets.models.EventInscription;
+import eventstickets.models.MiniCourse;
+import eventstickets.models.MiniCourseInscription;
+import eventstickets.models.Talk;
 import eventstickets.policies.EventPolicy;
 
 @ManagedBean(name = "eventInscriptionMB")
@@ -20,7 +27,10 @@ import eventstickets.policies.EventPolicy;
 public class EventInscriptionMB extends AuthenticateUser implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private EventInscription eventInscription = new EventInscription();
-	private Integer eventId;
+	
+	@ManagedProperty(value="#{param.eventId}")
+	private String eventId;
+	
 	
 	public EventInscriptionMB() {
 		new AuthenticateUser();
@@ -40,6 +50,21 @@ public class EventInscriptionMB extends AuthenticateUser implements Serializable
 		}
 	}
 	
+	public String details() {
+		checkPermission(EventPolicy.register(getCurrentUser()));
+		return "detailsInscription";
+	}
+	
+	public List<Talk> getTalks() {
+		TalkDAO dao = new TalkDAO();
+		return dao.getTalkByEvent(Integer.parseInt(getEventId()));
+	}
+	
+	public List<MiniCourseInscription> getMiniCourseInscription() {
+		MiniCourseInscriptionDAO dao = new MiniCourseInscriptionDAO();
+		return dao.registered(Integer.parseInt(getEventId()));
+	}
+	
 	public List<Event> getEventsByUser() {
 		EventInscriptionDAO dao = new EventInscriptionDAO();
 		return dao.getNotRegisteredEvents(getCurrentUser().getId());
@@ -49,8 +74,8 @@ public class EventInscriptionMB extends AuthenticateUser implements Serializable
 		return new EventDAO().all();
 	}
 	
-	private Event getEvent(){
-		return new EventDAO().find(eventId);
+	public Event getEvent(){
+		return new EventDAO().find(Integer.parseInt(getEventId()));
 	}
 	
 	public EventInscription getEventInscription() {
@@ -61,11 +86,11 @@ public class EventInscriptionMB extends AuthenticateUser implements Serializable
 		this.eventInscription = eventInscription;
 	}
 	
-	public Integer getEventId() {
+	public String getEventId() {
 		return eventId;
 	}
 	
-	public void setEventId(Integer eventId) {
+	public void setEventId(String eventId) {
 		this.eventId = eventId;
 	}
 }
