@@ -129,7 +129,7 @@ public class EventMB extends AuthenticateUser implements Serializable {
 	}
 	
 	public String details() {
-		checkPermission(EventPolicy.details(getCurrentUser()));
+		checkPermission(EventPolicy.detailsEvent(getCurrentUser()));
 		EventDAO dao = new EventDAO();
 		event = dao.find(id);
 		placeId = event.getPlace().getId();

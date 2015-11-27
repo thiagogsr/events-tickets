@@ -16,7 +16,7 @@ public class EventPolicy {
 		return user.getRole() == Role.PARTICIPANT;
 	}
 	
-	public static boolean details(User user) {
+	public static boolean detailsEvent(User user) {
 		return user.getRole() == Role.MANAGER || user.getRole() == Role.ADMIN;
 	}
 }
