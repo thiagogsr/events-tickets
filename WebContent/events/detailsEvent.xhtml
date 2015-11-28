@@ -49,67 +49,66 @@
 							<h:outputText value="#{eventMB.event.inscriptionsLimit}" />
 						</li>
 					</ul>
+
 					<h2>Palestras</h2>
-					<ul>
-						<ui:repeat var="talk" value="#{eventMB.talks}">
-							<li>
-								<h:outputText value="Título: " /> 
-								<h:outputText value="#{talk.description}" />
-							</li>
-							<li>
-								<h:outputText value="Local: " /> 
-								<h:outputText value="#{talk.place.title}" />
-							</li>
-							<li>
-								<h:outputText value="Data da palestra: " /> 
-								<h:outputText value="#{talk.startDate}">
-									<f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
-								</h:outputText>
-							</li>
-							<li>
-								<h:outputText value="Palestrante: " /> 
-								<h:outputText value="#{talk.speaker.name}" />
-							</li>
-						</ui:repeat>
-					</ul>
+					<h:dataTable value="#{eventMB.talks}" var="talk" styleClass="table">
+						<h:column>
+							<f:facet name="header">Título</f:facet>
+					    	#{talk.place.title}
+						</h:column>
+						<h:column>
+							<f:facet name="header">Data de Início</f:facet>
+					    	<h:outputText value="#{talk.startDate}">
+								<f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+							</h:outputText>
+						</h:column>
+						<h:column>
+							<f:facet name="header">Data de Término</f:facet>
+					    	<h:outputText value="#{talk.endDate}">
+								<f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+							</h:outputText>
+						</h:column>
+						<h:column>
+							<f:facet name="header">Palestrante</f:facet>
+					    	#{talk.speaker.name}
+						</h:column>
+					</h:dataTable>
+					
 					<h2>Mini cursos</h2>
-					<ul>
-						<ui:repeat var="miniCourse" value="#{eventMB.miniCourses}">
-							<li>
-								<h:outputText value="Título: " /> 
-								<h:outputText value="#{miniCourse.title}" />
-							</li>
-							<li>
-								<h:outputText value="Local: " /> 
-								<h:outputText value="#{miniCourse.place.title}" />
-							</li>
-							<li>
-								<h:outputText value="Limite de inscritos: " /> 
-								<h:outputText value="#{miniCourse.inscriptionsLimit}" />
-							</li>
-							<li>
-								<h:outputText value="Ministrante: " /> 
-								<h:outputText value="#{miniCourse.speaker.name}" />
-							</li>
-						</ui:repeat>
-					</ul>
+					<h:dataTable value="#{eventMB.miniCourses}" var="miniCourse" styleClass="table">
+						<h:column>
+							<f:facet name="header">Título</f:facet>
+					    	#{miniCourse.title}
+						</h:column>
+						<h:column>
+							<f:facet name="header">Local</f:facet>
+					    	#{miniCourse.place.title}
+						</h:column>
+						<h:column>
+							<f:facet name="header">Limite de inscritos</f:facet>
+					    	#{miniCourse.inscriptionsLimit}
+						</h:column>
+						<h:column>
+							<f:facet name="header">Ministrante</f:facet>
+					    	#{miniCourse.speaker.name}
+						</h:column>
+					</h:dataTable>
+
 					<h2>Inscritos</h2>
-					<ul>
-						<ui:repeat var="subscribed" value="#{eventMB.eventInscriptions}">
-							<li>
-								<h:outputText value="Nome: " /> 
-								<h:outputText value="#{subscribed.user.name}" />
-							</li>
-							<li>
-								<h:outputText value="Preço do evento: " /> 
-								<h:outputText value="#{subscribed.price}" />
-							</li>
-							<li>
-								<h:outputText value="Email: " /> 
-								<h:outputText value="#{subscribed.user.email}" />
-							</li>
-						</ui:repeat>
-					</ul>
+					<h:dataTable value="#{eventMB.eventInscriptions}" var="subscribed" styleClass="table">
+						<h:column>
+							<f:facet name="header">Nome</f:facet>
+					    	#{subscribed.user.name}
+						</h:column>
+						<h:column>
+							<f:facet name="header">Valor pago</f:facet>
+					    	#{subscribed.price}
+						</h:column>
+						<h:column>
+							<f:facet name="header">E-mail</f:facet>
+					    	#{subscribed.user.email}
+						</h:column>
+					</h:dataTable>
 				</h:form>
 			</div>
 		</div>
