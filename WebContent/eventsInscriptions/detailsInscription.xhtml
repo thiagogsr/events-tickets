@@ -45,52 +45,46 @@
 							</h:outputText>
 						</li>
 					</ul>
+
 					<h2>Palestras</h2>
-					<ul>
-						<ui:repeat var="talk" value="#{eventInscriptionMB.talks}">
-							<li>
-								<h:outputText value="Título: " /> 
-								<h:outputText value="#{talk.description}" />
-							</li>
-							<li>
-								<h:outputText value="Local: " /> 
-								<h:outputText value="#{talk.place.title}" />
-							</li>
-							<li>
-								<h:outputText value="Data da palestra: " /> 
-								<h:outputText value="#{talk.startDate}">
-									<f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
-								</h:outputText>
-							</li>
-							<li>
-								<h:outputText value="Palestrante: " /> 
-								<h:outputText value="#{talk.speaker.name}" />
-							</li>
-						</ui:repeat>
-					</ul>
+					<h:dataTable value="#{eventInscriptionMB.talks}" var="talk" styleClass="table">
+						<h:column>
+							<f:facet name="header">Título</f:facet>
+					    	#{talk.place.title}
+						</h:column>
+						<h:column>
+							<f:facet name="header">Data de Início</f:facet>
+					    	<h:outputText value="#{talk.startDate}">
+								<f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+							</h:outputText>
+						</h:column>
+						<h:column>
+							<f:facet name="header">Data de Término</f:facet>
+					    	<h:outputText value="#{talk.endDate}">
+								<f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+							</h:outputText>
+						</h:column>
+						<h:column>
+							<f:facet name="header">Palestrante</f:facet>
+					    	#{talk.speaker.name}
+						</h:column>
+					</h:dataTable>
+					
 					<h2>Mini cursos</h2>
-					<ul>
-						<ui:repeat var="miniCourseIncription" value="#{eventInscriptionMB.miniCourseInscription}">
-							<li>
-								<h:outputText value="Título: " /> 
-								<h:outputText value="#{miniCourseIncription.miniCourse.title}" />
-							</li>
-							<li>
-								<h:outputText value="Local: " /> 
-								<h:outputText value="#{miniCourseIncription.miniCourse.place.title}" />
-							</li>
-							<li>
-								<h:outputText value="Ministrante: " /> 
-								<h:outputText value="#{miniCourseIncription.miniCourse.speaker.name}" />
-							</li>
-							<li>
-								<h:outputText value="Data de realização: " /> 
-								<h:outputText value="#{miniCourseIncription.miniCourse.date}">
-									<f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
-								</h:outputText>
-							</li>
-						</ui:repeat>
-					</ul>
+					<h:dataTable value="#{eventInscriptionMB.miniCourseInscription}" var="miniCourseInscription" styleClass="table">
+						<h:column>
+							<f:facet name="header">Título</f:facet>
+					    	#{miniCourseInscription.miniCourse.title}
+						</h:column>
+						<h:column>
+							<f:facet name="header">Local</f:facet>
+					    	#{miniCourseInscription.miniCourse.place.title}
+						</h:column>
+						<h:column>
+							<f:facet name="header">Ministrante</f:facet>
+					    	#{miniCourseInscription.miniCourse.speaker.name}
+						</h:column>
+					</h:dataTable>
 				</h:form>
 			</div>
 		</div>
