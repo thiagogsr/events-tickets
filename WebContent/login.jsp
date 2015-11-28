@@ -23,6 +23,12 @@
 						out.println("<div class='alert alert-danger' role='alert'>Usuário ou senha inválido.</div>");
 					}
 				%>
+				<%
+					String success = request.getParameter("success");
+					if (success != null && success.equals("true")) {
+						out.println("<div class='alert alert-success' role='alert'>Usuário criado com sucesso.</div>");
+					}
+				%>
 				<form action="signIn" method="post">
 					<div class="form-group">
 						<label for="username">Usuário</label>

@@ -1,9 +1,11 @@
 package eventstickets.controllers;
 
+import java.io.IOException;
 import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 
 import eventstickets.dao.UserDAO;
 import eventstickets.models.User;
@@ -22,13 +24,11 @@ public class PublicUserMB implements Serializable{
 		this.user = user;
 	}
 	
-	public String create(){
+	public void create() throws IOException{
 		UserDAO dao = new UserDAO();
 		
 		if (dao.register(user)) {
-			return "login.jsp";
-		} else {
-			return "singUp";
+			FacesContext.getCurrentInstance().getExternalContext().redirect("login.jsp?success=true");
 		}
 	}
 }
